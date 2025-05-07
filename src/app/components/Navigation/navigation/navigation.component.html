@@ -1,19 +1,23 @@
 <div class="nav_container">
-<h2>CYBER</h2>
-  <input type="text" placeholder="Search">
+  <h2><a class="logo" routerLink="/">CYBER</a></h2>
+  <input type="text" placeholder="Search" />
   <nav>
     <ul>
-      <li>
-        <a class="active" href="">Home</a>
-        <a href="">About us</a>
-        <a href="">Contact Us</a>
-        <a href="">Blog</a>
-      </li>
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/products">Products</a></li>
+      <li><a routerLink="/contact">Contact</a></li>
+      <li><a routerLink="/blog">Blog</a></li>
     </ul>
   </nav>
   <div class="nav_btns">
-    <img src="assets/images/favorite-icon.png" alt="favorite-icon">
-    <img src="assets/images/shopping-cart.png" alt="shopping-cart">
-    <img src="assets/images/user.png" alt="user">
+    <a routerLink="/favorites"
+      ><img src="assets/images/favorite-icon.png" alt="favorite-icon"
+    /></a>
+    <a routerLink="/cart">
+      <img src="assets/images/shopping-cart.png" alt="shopping-cart" />
+    </a>
+    <a routerLink="/login">
+      <img src="assets/images/user.png" alt="user" />
+    </a>
   </div>
 </div>

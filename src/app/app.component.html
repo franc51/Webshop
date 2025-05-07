@@ -1,2 +1,8 @@
 <app-navigation></app-navigation>
-<router-outlet />
+
+<!-- Loading GIF -->
+<div class="loading-overlay" *ngIf="loading">
+  <img src="assets/images/spinner.gif" alt="Loading..." />
+</div>
+
+<router-outlet></router-outlet>

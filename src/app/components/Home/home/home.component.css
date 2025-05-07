@@ -8,7 +8,9 @@
   padding-top: 10rem;
   padding-left: 15%;
   color: #fefefe;
-  font-family:  "Inter";
+  font-family: "Inter";
+  animation: fadeInBackground 1.2s ease-out forwards;
+  opacity: 0;
 }
 p {
   color: #68656c;
@@ -22,7 +24,8 @@ p {
 }
 .bolder {
   font-weight: 900;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 .home_proBeyond {
   font-size: 1.3rem;
@@ -37,9 +40,26 @@ button {
   font-size: 1.1rem;
   margin-top: 1rem;
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(10rem);
+  animation: fadeInUp 1s ease-out forwards;
 }
 button:hover {
   background-color: white;
   color: #211c23;
   transition: 0.5s ease;
+}
+@keyframes fadeInBackground {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

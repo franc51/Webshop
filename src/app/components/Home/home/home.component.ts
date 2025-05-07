@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
-import { Navigation } from '@angular/router';
-import { NavigationComponent } from "../../Navigation/navigation/navigation.component";
-
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NavigationComponent],
+  imports: [RouterModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}
