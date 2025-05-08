@@ -13,6 +13,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
   styleUrl: './signup.component.css',
 })
 export class SignupComponent {
+
+  constructor(private http: HttpClient, private router: Router) {}
+
   name = '';
   email = '';
   password = '';
