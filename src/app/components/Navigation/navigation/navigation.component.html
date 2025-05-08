@@ -1,7 +1,14 @@
 <div class="nav_container">
   <h2><a class="logo" routerLink="/">CYBER</a></h2>
+
+  <!-- Hamburger Toggle Button -->
+  <button class="hamburger" (click)="toggleMenu()">
+HHH
+  </button>
+
   <input type="text" placeholder="Search" />
-  <nav>
+
+  <nav [class.active]="menuOpen">
     <ul>
       <li><a routerLink="/">Home</a></li>
       <li><a routerLink="/products">Products</a></li>
@@ -9,15 +16,16 @@
       <li><a routerLink="/blog">Blog</a></li>
     </ul>
   </nav>
+
   <div class="nav_btns">
-    <a routerLink="/favorites"
-      ><img src="assets/images/favorite-icon.png" alt="favorite-icon"
-    /></a>
+    <a routerLink="/favorites">
+      <img src="assets/images/favorite-icon.png" alt="favorite-icon" />
+    </a>
     <a routerLink="/cart">
       <img src="assets/images/shopping-cart.png" alt="shopping-cart" />
     </a>
-    <a routerLink="/login">
-      <img src="assets/images/user.png" alt="user" />
+    <a>
+      <img src="assets/images/user.png" alt="user" (click)="checkIfLoggedIn()" />
     </a>
   </div>
 </div>

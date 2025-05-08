@@ -1,0 +1,79 @@
+.account-container {
+  max-width: 400px;
+  margin: 1rem 0;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: fit-content;
+}
+
+.account-container h2 {
+  text-align: left;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.account-container label {
+  display: block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: #444;
+}
+
+.account-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: border 0.2s;
+  color: var(--nav_logo_color);
+}
+
+.account-container input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.account-container button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: var(--nav_logo_color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.account-container button:hover {
+  background-color: #0056b3;
+}
+.account_and_products_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0 18rem;
+}
+
+/* Stack items vertically on smaller screens */
+@media (max-width: 1024px) {
+  .account_and_products_container {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  .account-container {
+    max-width: 100%;
+  }
+}
+.logOff_btn {
+  background-color: red !important;
+}

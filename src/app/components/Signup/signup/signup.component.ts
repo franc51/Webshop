@@ -22,7 +22,6 @@ export class SignupComponent {
   confirmPassword = '';
 
   onSubmit() {
-    // Basic form validation
     if (this.password !== this.confirmPassword) {
       alert('Passwords do not match!');
       return;
@@ -34,6 +33,15 @@ export class SignupComponent {
       password: this.password,
     };
 
-
+    this.http.post('http://localhost:5000/api/signup', userData).subscribe({
+      next: (response) => {
+        alert('Signup successful!');
+        this.router.navigate(['/login']);
+      },
+      error: (error) => {
+        alert('Signup failed: ' + error.error.message || 'Unknown error');
+        console.error(error);
+      }
+    });
   }
 }
