@@ -38,6 +38,7 @@ button {
   background-color: #211c23;
   color: rgb(212, 212, 212);
   font-size: 1.1rem;
+  font-weight: 900;
   margin-top: 1rem;
   cursor: pointer;
   opacity: 0;
@@ -61,5 +62,58 @@ button:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@media screen and (max-width: 700px) {
+  .home_backgroundImage {
+    background-color: #211c23;
+    background-image: url("/assets/images/home_background.jpg");
+    background-repeat: no-repeat;
+    background-size: 21rem;
+    background-position: 2rem 26rem;
+    height: 90vh;
+    padding: 3rem 2rem;
+    color: #fefefe;
+    font-family: "Inter";
+    animation: fadeInBackground 1.2s ease-out forwards;
+    opacity: 0;
+    text-align: center;
+  }
+  p {
+    color: #68656c;
+    font-weight: 800;
+  }
+  .home_background_title {
+    font-size: 4rem;
+    font-weight: 200;
+    letter-spacing: 0.2rem;
+    margin: 0;
+  }
+  .bolder {
+    font-weight: 900;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+      "Lucida Sans", Arial, sans-serif;
+  }
+  .home_proBeyond {
+    font-size: 1.3rem;
+    font-weight: 900;
+  }
+  button {
+    border: 1px solid rgb(161, 161, 161);
+    border-radius: 0.5rem;
+    padding: 1.2rem 5rem;
+    background-color: #211c23;
+    color: rgb(212, 212, 212);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(10rem);
+    animation: fadeInUp 1s ease-out forwards;
+  }
+  button:hover {
+    background-color: white;
+    color: #211c23;
+    transition: 0.5s ease;
   }
 }

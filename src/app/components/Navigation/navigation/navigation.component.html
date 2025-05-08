@@ -9,21 +9,21 @@
 
     <nav>
       <ul>
-        <li><a routerLink="/">Home</a></li>
-        <li><a routerLink="/products">Products</a></li>
-        <li><a routerLink="/contact">Contact</a></li>
-        <li><a routerLink="/blog">Blog</a></li>
+        <li><a routerLink="/" (click)="closeMenu()">Home</a></li>
+        <li><a routerLink="/products" (click)="closeMenu()">Products</a></li>
+        <li><a routerLink="/contact" (click)="closeMenu()">Contact</a></li>
+        <li><a routerLink="/blog" (click)="closeMenu()">Blog</a></li>
       </ul>
     </nav>
 
     <div class="nav_btns">
-      <a routerLink="/favorites">
+      <a routerLink="/favorites" (click)="closeMenu()">
         <img src="assets/images/favorite-icon.png" alt="favorite-icon" />
       </a>
-      <a routerLink="/cart">
+      <a routerLink="/cart" (click)="closeMenu()">
         <img src="assets/images/shopping-cart.png" alt="shopping-cart" />
       </a>
-      <a routerLink="/login">
+      <a routerLink="/login" (click)="closeMenu()" (click)="checkIfLoggedIn()">
         <img src="assets/images/user.png" alt="user" />
       </a>
     </div>

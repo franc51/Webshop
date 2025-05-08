@@ -12,21 +12,34 @@ import { Router } from '@angular/router';
   styleUrl: './navigation.component.css',
 })
 export class NavigationComponent {
+  menuOpen = false;
 
-menuOpen = false;
-toggleMenu() {
-  this.menuOpen = !this.menuOpen;
-  const navResponsive = document.querySelector('.nav_responsive') as HTMLElement | null;
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+    const navResponsive = document.querySelector(
+      '.nav_responsive'
+    ) as HTMLElement | null;
 
-  // Check if the element is not null before accessing its properties
-  if (navResponsive) {
-    if (this.menuOpen) {
-      navResponsive.classList.add('active');
-    } else {
+    // Check if the element is not null before accessing its properties
+    if (navResponsive) {
+      if (this.menuOpen) {
+        navResponsive.classList.add('active');
+      } else {
+        navResponsive.classList.remove('active');
+      }
+    }
+  }
+
+  // Method to close the menu when a link is clicked
+  closeMenu() {
+    this.menuOpen = false;
+    const navResponsive = document.querySelector(
+      '.nav_responsive'
+    ) as HTMLElement | null;
+    if (navResponsive) {
       navResponsive.classList.remove('active');
     }
   }
-}
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -39,5 +52,4 @@ toggleMenu() {
       this.router.navigate(['/login']);
     }
   }
-
 }
