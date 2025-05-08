@@ -16,8 +16,17 @@ export class NavigationComponent {
 menuOpen = false;
 toggleMenu() {
   this.menuOpen = !this.menuOpen;
-}
+  const navResponsive = document.querySelector('.nav_responsive') as HTMLElement | null;
 
+  // Check if the element is not null before accessing its properties
+  if (navResponsive) {
+    if (this.menuOpen) {
+      navResponsive.classList.add('active');
+    } else {
+      navResponsive.classList.remove('active');
+    }
+  }
+}
 
   constructor(private http: HttpClient, private router: Router) {}
 
