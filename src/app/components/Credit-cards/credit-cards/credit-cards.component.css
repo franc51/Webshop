@@ -5,12 +5,14 @@
   background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
 }
 
 .account-container h2 {
   text-align: center;
   margin-bottom: 24px;
   color: #333;
+  font-weight: 100;
 }
 
 .account-container label {

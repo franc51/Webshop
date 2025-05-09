@@ -24,6 +24,10 @@ export class AccountComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  showFeatNotAvailable(){
+    alert("Feature not available yet!");
+  }
+
   ngOnInit() {
     // Load the user's current info from the server when the page loads
     this.getUserInfo();
@@ -50,7 +54,7 @@ export class AccountComponent implements OnInit {
         },
         error: (error) => {
           console.error('❌ Error fetching user info:', error); // ✅ Log full error
-          alert('Failed to fetch user data. Check if you are logged in.');
+          alert('Please Log in');
         }
       });
     } else {

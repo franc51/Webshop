@@ -3,7 +3,7 @@
   <form (ngSubmit)="onSubmit()">
     <input
       type="text"
-      placeholder="Name"
+      placeholder="Full Name"
       [(ngModel)]="name"
       name="name"
       required
@@ -34,4 +34,5 @@
   <p class="hint">
     Already have an account? <a routerLink="/login">Sign In</a>
   </p>
+  <app-spinner *ngIf="isLoading"></app-spinner>
 </div>

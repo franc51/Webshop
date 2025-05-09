@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SpinnerComponent } from '../../Spinner/spinner/spinner.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule, SpinnerComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css',
 })
@@ -20,13 +21,14 @@ export class SignupComponent {
   email = '';
   password = '';
   confirmPassword = '';
+  isLoading = false;
 
   onSubmit() {
+    this.isLoading = true;
     if (this.password !== this.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-
     const userData = {
       username: this.name,
       email: this.email,
@@ -41,6 +43,9 @@ export class SignupComponent {
       error: (error) => {
         alert('Signup failed: ' + error.error.message || 'Unknown error');
         console.error(error);
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }

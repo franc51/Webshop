@@ -4,21 +4,24 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { SpinnerComponent } from '../../Spinner/spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule, SpinnerComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
   email = '';
   password = '';
+  isLoading = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
+    this.isLoading = true;
     console.log('Logging in with:', this.email, this.password);
 
     const loginData = {
@@ -45,6 +48,9 @@ export class LoginComponent {
         console.error('Login failed', error);
         alert('Invalid email or password');
       },
+      complete: () => {
+        this.isLoading = false;
+      }
     });
   }
 }
