@@ -84,7 +84,7 @@ button:hover {
     font-weight: 800;
   }
   .home_background_title {
-    font-size: 4rem;
+    font-size: 3.8rem;
     font-weight: 200;
     letter-spacing: 0.2rem;
     margin: 0;
@@ -95,15 +95,15 @@ button:hover {
       "Lucida Sans", Arial, sans-serif;
   }
   .home_proBeyond {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 900;
   }
   button {
     border: 1px solid rgb(161, 161, 161);
     border-radius: 0.5rem;
-    padding: 1.2rem 5rem;
+    padding: 1rem 4rem;
     background-color: #211c23;
-    color: rgb(212, 212, 212);
+    color: rgb(202, 202, 202);
     font-size: 1.1rem;
     margin-top: 1rem;
     cursor: pointer;
@@ -115,5 +115,10 @@ button:hover {
     background-color: white;
     color: #211c23;
     transition: 0.5s ease;
+  }
+  p {
+    color: #68656c;
+    font-weight: 800;
+    font-size: 0.8rem;
   }
 }

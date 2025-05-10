@@ -141,7 +141,7 @@ input::placeholder {
 
   /* Responsive padding for the nav container */
   .nav_container {
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
   }
 
   /* Stack nav items vertically on mobile */
