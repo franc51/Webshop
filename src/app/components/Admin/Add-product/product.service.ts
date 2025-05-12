@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 // best practice
@@ -14,18 +14,21 @@ export interface Product {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-
   private postProductsRoute = 'http://localhost:5000/api/add-products';
   private getProductsRoute = 'http://localhost:5000/api/get-all-products';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-   // Fetch products from the backend
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.getProductsRoute);
+  // Fetch products from the backend, optionally filtered
+  getProducts(category?: string): Observable<Product[]> {
+    let params = new HttpParams();
+    if (category) {
+      params = params.set('category', category);
+    }
+    return this.http.get<Product[]>(this.getProductsRoute, { params });
   }
 
   // Method to add a product

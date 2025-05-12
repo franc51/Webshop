@@ -1,34 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCardComponent } from '../../Product card/product-card/product-card.component';
-import { ProductService, Product } from '../../Admin/Add-product/product.service';
+import { ProductFilterComponent } from '../Product-filter/product-filter/product-filter.component';
+import {
+  ProductService,
+  Product,
+} from '../../Admin/Add-product/product.service';
 import { Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '../../Spinner/spinner/spinner.component';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [ProductCardComponent, CommonModule],
+  imports: [
+    ProductCardComponent,
+    ProductFilterComponent,
+    CommonModule,
+    SpinnerComponent,
+  ],
   templateUrl: './product-list.component.html',
-  styleUrl: './product-list.component.css',
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-
   products: Product[] = []; // Array to hold products
   loading: boolean = false;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.fetchProducts();
+    this.fetchProducts(); // Optional: Fetch all products initially (or remove if you want to start empty)
   }
 
-  fetchProducts() {
+  // This method will be called when filters change (category, price, etc.)
+  onFiltersChanged(filters: any) {
+    // If a category is selected, fetch products by category
+    if (filters.category) {
+      this.fetchProducts(filters.category);
+    }
+  }
+
+  // Fetch products by category (or all products if no category is specified)
+  fetchProducts(category?: string) {
     this.loading = true; // Set loading to true before fetching data
-    this.productService.getProducts().subscribe(
+
+    // Call the service to get products by category
+    this.productService.getProducts(category).subscribe(
       (data) => {
         console.log('API Response:', data); // Log the full response
-
-        // Directly assign data to products, as data is already an array
+        console.log(category);
+        // Assign data to products
         this.products = data;
 
         console.log('Products:', this.products); // Log the processed products array

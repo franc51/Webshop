@@ -1,0 +1,71 @@
+<div class="filter-container">
+  <!-- Category -->
+  <label for="category">Category:</label>
+  <select
+    id="category"
+    [(ngModel)]="selectedCategory"
+    (change)="onCategoryChange()"
+  >
+    <option value="">-- Select Category --</option>
+    <option *ngFor="let cat of categories" [value]="cat.value">
+      {{ cat.label }}
+    </option>
+  </select>
+
+  <!-- Price Range -->
+  <label for="priceMin">Price Range:</label>
+  <select id="priceMin" [(ngModel)]="priceMin" (change)="emitFilters()">
+    <option value="">-- Min Price --</option>
+    <option *ngFor="let p of [0, 100, 200, 500, 1000, 2000]" [value]="p">
+      {{ p }}
+    </option>
+  </select>
+  <select id="priceMax" [(ngModel)]="priceMax" (change)="emitFilters()">
+    <option value="">-- Max Price --</option>
+    <option *ngFor="let p of [200, 500, 1000, 2000, 3000, 5000]" [value]="p">
+      {{ p }}
+    </option>
+  </select>
+
+  <!-- Rating -->
+  <label for="ratingMin">Minimum Rating:</label>
+  <select id="ratingMin" [(ngModel)]="ratingMin" (change)="emitFilters()">
+    <option value="">-- Min Rating --</option>
+    <option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">{{ r }}★</option>
+  </select>
+
+  <!-- Smartphone-specific Filters -->
+  <ng-container *ngIf="selectedCategory === 'phones'">
+    <label>Screen Size:</label>
+    <select [(ngModel)]="phoneFilters.screenSize" (change)="emitFilters()">
+      <option value="">Any</option>
+      <option>5.5"</option>
+      <option>6.1"</option>
+      <option>6.7"</option>
+    </select>
+
+    <label>Battery Capacity:</label>
+    <select [(ngModel)]="phoneFilters.battery" (change)="emitFilters()">
+      <option value="">Any</option>
+      <option>3000mAh</option>
+      <option>4000mAh</option>
+      <option>5000mAh</option>
+    </select>
+
+    <label>RAM:</label>
+    <select [(ngModel)]="phoneFilters.ram" (change)="emitFilters()">
+      <option value="">Any</option>
+      <option value="4">4 GB</option>
+      <option value="6">6 GB</option>
+      <option value="8">8 GB</option>
+    </select>
+
+    <label>Camera:</label>
+    <select [(ngModel)]="phoneFilters.camera" (change)="emitFilters()">
+      <option value="">Any</option>
+      <option>12 MP</option>
+      <option>48 MP</option>
+      <option>108 MP</option>
+    </select>
+  </ng-container>
+</div>

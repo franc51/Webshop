@@ -7,12 +7,11 @@ import { Product, ProductService } from '../product.service';
 @Component({
   selector: 'app-add-products',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, CommonModule],
   templateUrl: './add-products.component.html',
-  styleUrl: './add-products.component.css'
+  styleUrl: './add-products.component.css',
 })
 export class AddProductsComponent {
-
   // Define a product object that holds the form data
   product: Product = {
     name: '',
@@ -21,7 +20,7 @@ export class AddProductsComponent {
     price: 0,
     newArrival: false,
     bestseller: false,
-    featured: false
+    featured: false,
   };
 
   // Inject the ProductService into the component
@@ -38,7 +37,7 @@ export class AddProductsComponent {
         error: (err) => {
           console.error('Error adding product:', err);
           // Handle error, e.g., show an error message
-        }
+        },
       });
     } else {
       console.log('Form is invalid');

@@ -124,7 +124,8 @@ input::placeholder {
     background-color: white;
     z-index: 1;
     padding: 1rem;
-    width: 92vw;
+    width: 93vw;
+    height: 84vh;
     text-align: center;
   }
 
@@ -147,19 +148,21 @@ input::placeholder {
   /* Stack nav items vertically on mobile */
   ul {
     flex-direction: column;
-    gap: 0;
+    gap: 0.5rem;
     padding-left: 0;
     margin: 0;
     font-size: 1.4rem;
     margin-bottom: 2rem;
     width: 90vw;
-    border: 1px solid rgb(204, 204, 204);
     border-radius: 0.5rem;
   }
 
   li {
     padding: 1rem;
     margin: 0;
+    border-bottom: 1px solid rgba(134, 134, 134, 0.267);
+    border-radius: 0.5rem;
+    box-shadow: 3px 5px 5px 5px rgba(204, 204, 204, 0.582);
   }
 
   /* Input field on mobile */
@@ -173,5 +176,6 @@ input::placeholder {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 8rem;
   }
 }
