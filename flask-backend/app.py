@@ -21,6 +21,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 client = MongoClient(MONGO_URI)
 db = client['cyber']
 users_collection = db['users']
+product_collection = db['products']
 
 # Signup route
 @app.route('/api/signup', methods=['POST'])
@@ -111,6 +112,53 @@ def user_info():
         return jsonify({'message': 'Token has expired'}), 401
     except jwt.InvalidTokenError:
         return jsonify({'message': 'Invalid token'}), 401
+
+@app.route('/api/add-products', methods=['POST'])
+def add_product():
+    data = request.json
+    name = data.get('name')
+    category = data.get('category')
+    picture_url = data.get('pictureUrl')
+    price = data.get('price')
+    new_arrival = data.get('newArrival', False)
+    bestseller = data.get('bestseller', False)
+    featured = data.get('featured', False)
+    # Validate required fields
+    if not all([name, category, picture_url, price is not None]):
+        return jsonify({'message': 'Missing required fields'}), 400
+    try:
+        price = float(price)
+    except ValueError:
+        return jsonify({'message': 'Invalid price value'}), 400
+    product = {
+        'name': name,
+        'category': category,
+        'pictureUrl': picture_url,
+        'price': price,
+        'newArrival': bool(new_arrival),
+        'bestseller': bool(bestseller),
+        'featured': bool(featured)
+    }
+    result = product_collection.insert_one(product)
+    product['_id'] = str(result.inserted_id)
+
+    return jsonify({
+        'message': 'Product added successfully',
+        'product': product
+    }), 201
+
+@app.route('/api/get-all-products', methods=['GET'])
+def get_products():
+    # Fetch all products from the collection
+    products = product_collection.find()
+    # Convert MongoDB documents to a list of dictionaries and convert _id to string
+    product_list = []
+    for product in products:
+        product['_id'] = str(product['_id'])  # Convert ObjectId to string
+        product_list.append(product)
+    # Return the product list directly as an array
+    return jsonify(product_list), 200
+
 
 # Run the app
 if __name__ == '__main__':

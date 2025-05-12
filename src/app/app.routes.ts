@@ -5,6 +5,8 @@ import { SignupComponent } from './components/Signup/signup/signup.component';
 import { HomeComponent } from './components/Home/home/home.component';
 import { FavoritesComponent } from './components/Favorites/favorites/favorites.component';
 import { AccountComponent } from './components/Account/account/account.component';
+import { AddProductsComponent } from './components/Admin/Add-product/add-products/add-products.component';
+import { ProductListComponent } from './components/Product-list/product-list/product-list.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,9 +15,10 @@ export const routes: Routes = [
   { path: 'favorites', component: FavoritesComponent },
   { path: 'cart', component: FavoritesComponent },
   { path: 'account', component: AccountComponent },
-  { path: 'products', component: FavoritesComponent },
+  { path: 'products', component: ProductListComponent },
   { path: 'contact', component: FavoritesComponent },
   { path: 'blog', component: FavoritesComponent },
+  { path: 'add-new-product', component: AddProductsComponent },
 ];
 
 @NgModule({

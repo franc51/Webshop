@@ -47,6 +47,7 @@ export class LoginComponent {
       error: (error) => {
         console.error('Login failed', error);
         alert('Invalid email or password');
+        this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;

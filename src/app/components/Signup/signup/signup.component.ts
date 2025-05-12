@@ -54,6 +54,7 @@ export class SignupComponent {
       error: (error) => {
         alert('Signup failed: ' + error.error.message || 'Unknown error');
         console.error(error);
+        this.isLoading = false;
       },
       complete: () => {
         this.isLoading = false;

@@ -1,13 +1,9 @@
 <div class="product_list">
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
-  <app-product-card></app-product-card>
+  <div *ngIf="loading">Loading products...</div>
+  <!-- Add a condition for when there are no products available -->
+  <div *ngIf="!loading && products.length === 0">No products available.</div>
+
+  <div *ngFor="let product of products;">
+  <app-product-card [product]="product"></app-product-card>
+</div>
 </div>

@@ -37,6 +37,10 @@ export class AccountComponent implements OnInit {
     localStorage.removeItem('cyber_token');
     this.router.navigate(['/']);
   }
+  goToAddProducts() {
+    this.router.navigate(['/add-new-product']);
+  }
+
 
   getUserInfo() {
     const token = localStorage.getItem('cyber_token');

@@ -1,8 +1,9 @@
 .product_card {
   background-color: #f6f6f6;
   border-radius: 0.5rem;
-  padding: 1rem;
+  padding: 1.5rem;
   width: 15rem;
+  height: max-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +19,7 @@
   height: 10rem;
 }
 .product_card_info button {
-  padding: 1rem 3rem;
+  padding: 1rem 4rem;
   background-color: black;
   border: none;
   color: aliceblue;

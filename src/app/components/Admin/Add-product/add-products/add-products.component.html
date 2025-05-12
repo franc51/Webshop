@@ -1,0 +1,61 @@
+<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+  <h2>Add a product</h2>
+  <div>
+    <label for="name">Product Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="product.name" required />
+    <div *ngIf="productForm.controls['name']?.invalid && productForm.controls['name']?.touched">
+      <small class="error-text">Product Name is required.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="category">Category:</label>
+    <select id="category" name="category" [(ngModel)]="product.category" required>
+      <option value="phones">Phones</option>
+      <option value="smart-watches">Smart Watches</option>
+      <option value="cameras">Cameras</option>
+      <option value="headphones">Headphones</option>
+      <option value="computers">Computers</option>
+      <option value="gaming">Gaming</option>
+    </select>
+    <div *ngIf="productForm.controls['category']?.invalid && productForm.controls['category']?.touched">
+      <small class="error-text">Category is required.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="pictureUrl">Picture URL:</label>
+    <input type="url" id="pictureUrl" name="pictureUrl" [(ngModel)]="product.pictureUrl" required />
+    <div *ngIf="productForm.controls['pictureUrl']?.invalid && productForm.controls['pictureUrl']?.touched">
+      <small class="error-text">Valid Picture URL is required.</small>
+    </div>
+  </div>
+
+  <div>
+    <label for="price">Price (Lei):</label>
+    <input type="number" id="price" name="price" [(ngModel)]=" product.price" required min="0" />
+    <div *ngIf="productForm.controls['price']?.invalid && productForm.controls['price']?.touched">
+      <small class="error-text">Price is required and must be greater than 0.</small>
+    </div>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" name="newArrival" [(ngModel)]="product.newArrival" /> New Arrival
+    </label>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" name="bestseller" [(ngModel)]=" product.bestseller" /> Bestseller
+    </label>
+  </div>
+
+  <div>
+    <label>
+      <input type="checkbox" name="featured" [(ngModel)]="product.featured" /> Featured Product
+    </label>
+  </div>
+
+  <button type="submit" [disabled]="productForm.invalid">Add Product</button>
+</form>
