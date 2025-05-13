@@ -19,6 +19,8 @@ export const routes: Routes = [
   { path: 'contact', component: FavoritesComponent },
   { path: 'blog', component: FavoritesComponent },
   { path: 'add-new-product', component: AddProductsComponent },
+  { path: 'products/:category', component: ProductListComponent },
+
 ];
 
 @NgModule({

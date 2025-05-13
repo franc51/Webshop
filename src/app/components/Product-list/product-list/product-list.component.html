@@ -10,8 +10,9 @@
     </div>
 
     <div class="product_list">
-      <div *ngIf="!loading && products.length === 0">
-        No products available.
+      <div *ngIf="!loading && products.length === 0" class="no_products_available">
+        <p>No products available.</p>
+        <img src="/assets/images/cross.png" alt="">
       </div>
       <div *ngFor="let product of products">
         <app-product-card [product]="product"></app-product-card>

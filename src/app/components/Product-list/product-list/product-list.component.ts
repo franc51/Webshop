@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCardComponent } from '../../Product card/product-card/product-card.component';
 import { ProductFilterComponent } from '../Product-filter/product-filter/product-filter.component';
+import { ActivatedRoute } from '@angular/router';
 import {
   ProductService,
   Product,
@@ -25,11 +26,17 @@ export class ProductListComponent implements OnInit {
   products: Product[] = []; // Array to hold products
   loading: boolean = false;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    this.fetchProducts(); // Optional: Fetch all products initially (or remove if you want to start empty)
-  }
+ngOnInit() {
+  this.route.queryParams.subscribe(params => {
+    const category = params['category'];
+    console.log('Category from query params:', category);
+
+    // Call fetchProducts with category to filter the products
+    this.fetchProducts(category);
+  });
+}
 
   // This method will be called when filters change (category, price, etc.)
   onFiltersChanged(filters: any) {

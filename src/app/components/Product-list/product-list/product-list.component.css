@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   gap: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .filters_and_products {
   display: flex;
@@ -30,6 +31,15 @@
   justify-content: center;
   align-items: center;
 }
+.no_products_available {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 600;
+}
 
 @media screen and (max-width: 700px) {
   .product_list {
@@ -47,4 +57,10 @@
     gap: 1rem;
     padding: 0;
   }
+  .no_products_available {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 6rem;
+}
 }

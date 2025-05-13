@@ -13,7 +13,7 @@
   border: 1px solid rgba(128, 128, 128, 0.151);
 }
 .product_card:hover {
-  box-shadow: 2px 3px 10px 5px rgba(141, 141, 141, 0.658);
+  box-shadow: 2px 3px 10px 5px rgba(192, 192, 192, 0.658);
 }
 .product_card_info {
   text-align: center;

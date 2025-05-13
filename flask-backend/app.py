@@ -147,23 +147,18 @@ def add_product():
         'product': product
     }), 201
 
-from flask import request, jsonify
-
 @app.route('/api/get-all-products', methods=['GET'])
 def get_products():
     filters = {}
-
     # Read query parameters
     category = request.args.get('category')
     price_min = request.args.get('priceMin')
     price_max = request.args.get('priceMax')
     ram = request.args.get('ram')
-
     # Add category filter
     if category:
         filters['category'] = category
         print(f"Received category filter: {category}")
-
     # Combine price range properly
     if price_min or price_max:
         price_filter = {}
@@ -179,30 +174,23 @@ def get_products():
                 print("Invalid priceMax value:", price_max)
         if price_filter:
             filters['price'] = price_filter
-
     # Add RAM filter
     if ram:
         try:
             filters['ram'] = int(ram)
         except ValueError:
             print("Invalid RAM value:", ram)
-
     print('Filters applied:', filters)
-
     # Debug: count matching documents
     match_count = product_collection.count_documents(filters)
     print(f"Matching products count: {match_count}")
-
     # Debug: print a sample of matching products
     sample_products = list(product_collection.find(filters).limit(3))
     print("Sample matching products:", sample_products)
-
     # Query MongoDB
     products = product_collection.find(filters)
     product_list = [{**p, '_id': str(p['_id'])} for p in products]
     return jsonify(product_list), 200
-
-
 
 # Run the app
 if __name__ == '__main__':
