@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 // best practice
 export interface Product {
+  _id: string;
   name: string;
   category: string;
   pictureUrl: string;

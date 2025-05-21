@@ -1,1 +1,16 @@
-<p>favorites works!</p>
+<div class="filters_and_products">
+  <!-- No filters for favorites, but structure matches -->
+
+  <div class="product_list_wrapper">
+    <div class="product_list">
+      <div *ngIf="favoriteProducts.length === 0" class="no_products_available">
+        <p>No favorite products.</p>
+        <img src="/assets/images/cross.png" alt="No products">
+      </div>
+
+      <div *ngFor="let product of favoriteProducts">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
+
+import { FavoriteService } from '../../Favorites/Favorites-service/favorite.service';
 @Component({
   selector: 'app-navigation',
   standalone: true,
@@ -13,6 +15,17 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent {
   menuOpen = false;
+
+   favoriteCount = 0;
+
+  constructor(private http: HttpClient, private router: Router, private favoriteService: FavoriteService) {}
+
+  ngOnInit(){
+    this.updateFavoriteCount();
+  }
+  updateFavoriteCount() {
+    this.favoriteCount = this.favoriteService.getCount();
+  }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -41,10 +54,8 @@ export class NavigationComponent {
     }
   }
 
-  constructor(private http: HttpClient, private router: Router) {}
-
   checkIfLoggedIn() {
-    console.log('Image clicked, checking token...'); // ✅ Confirm it's running
+    console.log('checking token...'); // ✅ Confirm it's running
     const token = localStorage.getItem('cyber_token');
     if (token) {
       this.router.navigate(['/account']);

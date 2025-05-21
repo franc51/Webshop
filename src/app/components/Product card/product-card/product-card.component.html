@@ -1,8 +1,24 @@
 <div class="product_card">
-  <img class="fav" src="/assets/images/unfav.png" alt="Add to favorites" />
+  <img
+  class="fav"
+  [src]="isFavorite ? '/assets/images/fav.png' : '/assets/images/unfav.png'"
+  alt="Toggle favorite"
+  (click)="toggleFavorite()"
+/>
+
   <div class="product_card_info">
     <img [src]="product.pictureUrl" alt="{{ product.name }}" />
     <p>{{ product.name }}</p>
+    <div class="rating">
+  <div class="rating">
+  <!-- Filled stars -->
+  <span class="star filled">★★★★★</span>
+  <p class="review_nr">5 (<a href="#">240</a>)</p>
+
+  <!-- Empty stars -->
+  <span class="star"></span>
+</div>
+</div>
     <h2>
       {{ getMajorMinorParts(product.price).major }}
       <span class="price_minor">

@@ -18,12 +18,14 @@
 
     <div class="nav_btns">
       <a routerLink="/favorites" (click)="closeMenu()">
-        <img src="assets/images/favorite-icon.png" alt="favorite-icon" />
+        <img src="assets/images/favorite-icon.png" alt="favorite-icon" title="Favorites"/>
+        <span class="count_color count_font_size">{{favoriteCount}}</span>
       </a>
       <a routerLink="/cart" (click)="closeMenu()">
-        <img src="assets/images/shopping-cart.png" alt="shopping-cart" />
+        <img src="assets/images/shopping-cart.png" alt="shopping-cart" title="Cart"/>
+        <span class="count_color count_font_size">3</span>
       </a>
-      <a routerLink="/login" (click)="closeMenu()" (click)="checkIfLoggedIn()">
+      <a routerLink="/login" (click)="closeMenu()" (click)="checkIfLoggedIn()" title="Account">
         <img src="assets/images/user.png" alt="user" />
       </a>
     </div>

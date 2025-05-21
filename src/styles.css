@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
   --nav_text_color: rgb(170, 170, 170);
-  --nav_input_color: rgb(230, 230, 230);
+  --nav_input_color: rgba(230, 230, 230, 0.527);
   --nav_logo_color: rgb(75, 75, 75);
   --blue_button_color: #0056b3;
+  --count_color: rgb(255, 0, 0);
+  --count_font_size: 0.9rem;
 }
 
 body {

@@ -3,7 +3,7 @@
   border-radius: 8px;
   padding: 1rem;
   width: 13rem;
-  height: 24rem;
+  height: 25rem;
   display: flex;
   align-items: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -37,6 +37,10 @@
   left: 10%;
   margin-top: 0.7rem;
 }
+.product_card_info button:hover {
+  scale: 1.05;
+  transition: 0.3s ease;
+}
 .product_card_info h2 {
   font-weight: 700;
   color: brown;
@@ -47,6 +51,7 @@
   position: absolute;
   top: 0;
   right: 0;
+  height: 1.5rem;
 }
 .fav:hover {
   scale: 1.1;
@@ -59,8 +64,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.2em;
-  max-height: 2.4em; /* 1.2em * 2 lines */
-  font-size: 0.9rem;
+  max-height: 2.4em;
+  margin: 0;
 }
 .price_minor {
   font-size: 0.7em;
@@ -68,11 +73,37 @@
   color: brown;
 }
 
+.rating {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
+.star.filled {
+  color: #facc15; /* Tailwind's yellow-400 */
+}
+.review_nr {
+  color: rgb(48, 48, 48);
+  font-weight: 100;
+}
+.review_nr a {
+  font-size: 1rem;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 @media screen and (max-width: 700px) {
   .product_card {
-    width: 7rem;
+    width: 8.2rem;
     height: 19rem;
-    padding: 0 1.7rem;
+    padding: 0 1rem;
     padding-bottom: 1rem;
   }
   .product_card_info button {
@@ -90,4 +121,21 @@
     font-size: 1.2rem;
     color: brown;
   }
+  .star {
+  font-size: 1.2rem;
+}
+.rating {
+  display: flex;
+  gap: 0.1rem;
+  justify-content: center;
+  align-items: center;
+}
+.review_nr {
+  font-size: 0.8rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 100;
+}
+.review_nr a {
+  font-size: 0.8rem;
+}
 }

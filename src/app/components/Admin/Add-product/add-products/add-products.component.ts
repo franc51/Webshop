@@ -14,6 +14,7 @@ import { Product, ProductService } from '../product.service';
 export class AddProductsComponent {
   // Define a product object that holds the form data
   product: Product = {
+    _id: '',
     name: '',
     category: '',
     pictureUrl: '',

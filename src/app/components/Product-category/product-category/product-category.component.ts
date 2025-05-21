@@ -14,6 +14,20 @@ export class ProductCategoryComponent {
 
   goToPhones(){
     this.router.navigate(['/products'], { queryParams: { category: 'phones' } });
-
 }
+  goToSmartwatches(){
+    this.router.navigate(['/products'], {queryParams: { category: 'smartwatches'} });
+  }
+   goToCameras(){
+    this.router.navigate(['/products'], {queryParams: { category: 'cameras'} });
+  }
+  goToHeadphones(){
+    this.router.navigate(['/products'], {queryParams: { category: 'headphones'} });
+  }
+   goToComputers(){
+    this.router.navigate(['/products'], {queryParams: { category: 'computers'} });
+  }
+  goToGaming(){
+    this.router.navigate(['/products'], {queryParams: { category: 'gaming'} });
+  }
 }

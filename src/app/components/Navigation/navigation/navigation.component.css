@@ -55,7 +55,12 @@ img {
   gap: 1.5rem;
   cursor: pointer;
 }
-
+.count_color {
+  color: var(--count_color);
+}
+.count_font_size {
+  font-size: var(--count_font_size);
+}
 img:hover {
   scale: 1.1;
 }
