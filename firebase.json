@@ -1,15 +1,4 @@
 {
-  "apphosting": {
-    "backendId": "flask-backend",
-    "rootDir": "flask-backend",
-    "ignore": [
-      "node_modules",
-      ".git",
-      "firebase-debug.log",
-      "firebase-debug.*.log",
-      "functions"
-    ]
-  },
   "hosting": {
     "public": "dist/browser",
     "ignore": [
