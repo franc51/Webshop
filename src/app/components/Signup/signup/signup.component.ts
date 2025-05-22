@@ -31,11 +31,11 @@ export class SignupComponent {
   confirmPassword = '';
 
   onSubmit() {
-    this.isLoading = true;
     if (this.password !== this.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
+    this.isLoading = true;
     const userData: UserModel = {
       name: this.name,
       email: this.email,

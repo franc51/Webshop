@@ -3,9 +3,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 18rem;
+  padding: 0.7rem 18rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  box-shadow: 3px 3px 3px 3px rgba(197, 197, 197, 0.158);
 }
 
 /* Responsive container for nav and input */
@@ -147,7 +148,7 @@ input::placeholder {
 
   /* Responsive padding for the nav container */
   .nav_container {
-    padding: 0 1rem;
+    padding: 0.5rem 1rem;
   }
 
   /* Stack nav items vertically on mobile */
