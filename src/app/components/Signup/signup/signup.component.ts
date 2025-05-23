@@ -47,7 +47,7 @@ export class SignupComponent {
       isAdmin: this.isAdmin,
     };
 
-    this.http.post('${environment.apiUrl}/api/signup', userData).subscribe({
+    this.http.post(`${environment.apiUrl}/api/signup`, userData).subscribe({
       next: (response) => {
         alert('Signup successful!');
         this.router.navigate(['/login']);

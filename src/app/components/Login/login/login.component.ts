@@ -30,7 +30,7 @@ export class LoginComponent {
       password: this.password,
     };
 
-    this.http.post('${environment.apiUrl}/api/login', loginData).subscribe({
+    this.http.post(`${environment.apiUrl}/api/login`, loginData).subscribe({
       next: (response: any) => {
         console.log('Login successful', response);
 

@@ -21,8 +21,8 @@ export interface Product {
   providedIn: 'root',
 })
 export class ProductService {
-  private postProductsRoute = '${environment.apiUrl}/api/add-products';
-  private getProductsRoute = '${environment.apiUrl}/api/get-all-products';
+  private postProductsRoute = `${environment.apiUrl}/api/add-products`;
+  private getProductsRoute = `${environment.apiUrl}/api/get-all-products`;
 
   constructor(private http: HttpClient) {}
 
