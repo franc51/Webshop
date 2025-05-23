@@ -14,13 +14,14 @@ import { initializeApp, FirebaseApp } from "firebase/app";
 import { getAnalytics, Analytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA0OIwQCMH2lJ0SMirNj7bNghzMKrjRf9E",
-  authDomain: "cyber-aed44.firebaseapp.com",
-  projectId: "cyber-aed44",
-  storageBucket: "cyber-aed44.firebasestorage.app",
-  messagingSenderId: "535759361456",
-  appId: "1:535759361456:web:f2fcf0901b00e5b8b07275",
-  measurementId: "G-HPRJZY6Z1M"};
+  apiKey: "AIzaSyAawFBsnx5c696Zu18cuq0vFpPWE1sank4",
+  authDomain: "velto-70ff8.firebaseapp.com",
+  projectId: "velto-70ff8",
+  storageBucket: "velto-70ff8.firebasestorage.app",
+  messagingSenderId: "700798167297",
+  appId: "1:700798167297:web:f34a1c4a2eb7fc484b1300",
+  measurementId: "G-JJRLEQHMZ3"
+};
 @Component({
   selector: 'app-root',
   standalone: true,

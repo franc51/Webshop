@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "cyber-aed44"
-  }
+    "default": "velto-70ff8",
+    "masteroid": "velto-70ff8"
+  },
+  "targets": {},
+  "etags": {}
 }
