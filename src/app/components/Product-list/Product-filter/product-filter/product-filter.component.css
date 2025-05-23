@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column; /* 🔁 Vertical layout */
   gap: 1rem;
-  background-color: #f9f9f9;
+  background-color: white;
   padding: 1rem;
   margin: 1rem;
-  border-radius: 8px;
   max-width: 300px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: gray;
 }
 
 .filter-container label {
@@ -30,8 +30,22 @@
   border-color: #007bff;
   outline: none;
 }
+mat-expansion-panel-header  {
+  padding: 1rem;
+}
+
 @media screen and (max-width: 700px) {
   .filter-container {
-    display: flex;
+     max-width: 100%;  /* full width on mobile */
+    margin: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: none; /* optional: simpler on mobile */
+  }
+    mat-radio-button {
+    margin-bottom: 0.3rem;
+  }
+
+  mat-form-field {
+    margin-bottom: 0.75rem;
   }
 }

@@ -1,23 +1,36 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
+
 @Component({
   selector: 'app-product-filter',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+imports: [
+  CommonModule,
+  FormsModule,
+  MatExpansionModule,
+  MatSelectModule,
+  MatFormFieldModule,
+  MatRadioModule
+],
   templateUrl: './product-filter.component.html',
   styleUrl: './product-filter.component.css',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProductFilterComponent {
   @Output() filtersChanged = new EventEmitter<any>();
 
   categories = [
-    { label: 'phones', value: 'phones' },
-    { label: 'smart-watches', value: 'smart-watches' },
-    { label: 'cameras', value: 'cameras' },
-    { label: 'headphones', value: 'headphones' },
-    { label: 'computers', value: 'computers' },
-    { label: 'gaming', value: 'gaming' },
+    { label: 'Phones', value: 'phones' },
+    { label: 'Smart-watches', value: 'smart-watches' },
+    { label: 'Cameras', value: 'cameras' },
+    { label: 'Headphones', value: 'headphones' },
+    { label: 'Computers', value: 'computers' },
+    { label: 'Gaming', value: 'gaming' },
   ];
 
   selectedCategory = '';

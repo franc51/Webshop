@@ -98,6 +98,12 @@
   font-size: 1rem;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.flag_new{
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: rotate(270deg);
+}
 
 @media screen and (max-width: 700px) {
   .product_card {

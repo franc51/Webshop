@@ -1,71 +1,99 @@
-<div class="filter-container">
+<mat-accordion class="filter-container" multi>
   <!-- Category -->
-  <label for="category">Category:</label>
-  <select
-    id="category"
-    [(ngModel)]="selectedCategory"
-    (change)="onCategoryChange()"
-  >
-    <option value="">-- Select Category --</option>
-    <option *ngFor="let cat of categories" [value]="cat.value">
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Category</mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <mat-radio-group [(ngModel)]="selectedCategory" (change)="onCategoryChange()">
+    <mat-radio-button *ngFor="let cat of categories" [value]="cat.value">
       {{ cat.label }}
-    </option>
-  </select>
+    </mat-radio-button>
+  </mat-radio-group>
+</mat-expansion-panel>
+
 
   <!-- Price Range -->
-  <label for="priceMin">Price Range:</label>
-  <select id="priceMin" [(ngModel)]="priceMin" (change)="emitFilters()">
-    <option value="">-- Min Price --</option>
-    <option *ngFor="let p of [0, 100, 200, 500, 1000, 2000]" [value]="p">
-      {{ p }}
-    </option>
-  </select>
-  <select id="priceMax" [(ngModel)]="priceMax" (change)="emitFilters()">
-    <option value="">-- Max Price --</option>
-    <option *ngFor="let p of [200, 500, 1000, 2000, 3000, 5000]" [value]="p">
-      {{ p }}
-    </option>
-  </select>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Price Range</mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Min Price</mat-label>
+      <mat-select [(ngModel)]="priceMin" (selectionChange)="emitFilters()">
+        <mat-option [value]="null">-- Min Price --</mat-option>
+        <mat-option *ngFor="let p of [0, 100, 200, 500, 1000, 2000]" [value]="p">{{ p }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Max Price</mat-label>
+      <mat-select [(ngModel)]="priceMax" (selectionChange)="emitFilters()">
+        <mat-option [value]="null">-- Max Price --</mat-option>
+        <mat-option *ngFor="let p of [200, 500, 1000, 2000, 3000, 5000]" [value]="p">{{ p }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-expansion-panel>
 
   <!-- Rating -->
-  <label for="ratingMin">Minimum Rating:</label>
-  <select id="ratingMin" [(ngModel)]="ratingMin" (change)="emitFilters()">
-    <option value="">-- Min Rating --</option>
-    <option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">{{ r }}★</option>
-  </select>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Minimum Rating</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Rating</mat-label>
+      <mat-select [(ngModel)]="ratingMin" (selectionChange)="emitFilters()">
+        <mat-option [value]="null">-- Min Rating --</mat-option>
+        <mat-option *ngFor="let r of [1, 2, 3, 4, 5]" [value]="r">{{ r }}★</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-expansion-panel>
 
-  <!-- Smartphone-specific Filters -->
-  <ng-container *ngIf="selectedCategory === 'phones'">
-    <label>Screen Size:</label>
-    <select [(ngModel)]="phoneFilters.screenSize" (change)="emitFilters()">
-      <option value="">Any</option>
-      <option>5.5"</option>
-      <option>6.1"</option>
-      <option>6.7"</option>
-    </select>
+  <!-- Phone Specifications -->
+  <mat-expansion-panel *ngIf="selectedCategory === 'phones'">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Phone Specifications</mat-panel-title>
+    </mat-expansion-panel-header>
 
-    <label>Battery Capacity:</label>
-    <select [(ngModel)]="phoneFilters.battery" (change)="emitFilters()">
-      <option value="">Any</option>
-      <option>3000mAh</option>
-      <option>4000mAh</option>
-      <option>5000mAh</option>
-    </select>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Screen Size</mat-label>
+      <mat-select [(ngModel)]="phoneFilters.screenSize" (selectionChange)="emitFilters()">
+        <mat-option [value]="''">Any</mat-option>
+        <mat-option>5.5"</mat-option>
+        <mat-option>6.1"</mat-option>
+        <mat-option>6.7"</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <label>RAM:</label>
-    <select [(ngModel)]="phoneFilters.ram" (change)="emitFilters()">
-      <option value="">Any</option>
-      <option value="4">4 GB</option>
-      <option value="6">6 GB</option>
-      <option value="8">8 GB</option>
-    </select>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Battery</mat-label>
+      <mat-select [(ngModel)]="phoneFilters.battery" (selectionChange)="emitFilters()">
+        <mat-option [value]="''">Any</mat-option>
+        <mat-option>3000mAh</mat-option>
+        <mat-option>4000mAh</mat-option>
+        <mat-option>5000mAh</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <label>Camera:</label>
-    <select [(ngModel)]="phoneFilters.camera" (change)="emitFilters()">
-      <option value="">Any</option>
-      <option>12 MP</option>
-      <option>48 MP</option>
-      <option>108 MP</option>
-    </select>
-  </ng-container>
-</div>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>RAM</mat-label>
+      <mat-select [(ngModel)]="phoneFilters.ram" (selectionChange)="emitFilters()">
+        <mat-option [value]="null">Any</mat-option>
+        <mat-option [value]="4">4 GB</mat-option>
+        <mat-option [value]="6">6 GB</mat-option>
+        <mat-option [value]="8">8 GB</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Camera</mat-label>
+      <mat-select [(ngModel)]="phoneFilters.camera" (selectionChange)="emitFilters()">
+        <mat-option [value]="''">Any</mat-option>
+        <mat-option>12 MP</mat-option>
+        <mat-option>48 MP</mat-option>
+        <mat-option>108 MP</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-expansion-panel>
+</mat-accordion>

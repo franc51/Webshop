@@ -5,6 +5,7 @@
   alt="Toggle favorite"
   (click)="toggleFavorite()"
 />
+<img *ngIf="product.newArrival" class="flag_new" src="/assets/images/new.png" alt="">
 
   <div class="product_card_info">
     <img [src]="product.pictureUrl" alt="{{ product.name }}" />
