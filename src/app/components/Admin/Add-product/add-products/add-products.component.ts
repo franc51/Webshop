@@ -18,6 +18,7 @@ export class AddProductsComponent {
     name: '',
     category: '',
     pictureUrl: '',
+    rating: 0,
     price: 0,
     newArrival: false,
     bestseller: false,

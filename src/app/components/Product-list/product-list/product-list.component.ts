@@ -23,48 +23,53 @@ import { SpinnerComponent } from '../../Spinner/spinner/spinner.component';
   styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-  products: Product[] = []; // Array to hold products
+  products: Product[] = [];        // filtered products
+  allProducts: Product[] = [];     // full list fetched from backend
   loading: boolean = false;
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) {}
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {}
 
-ngOnInit() {
-  this.route.queryParams.subscribe(params => {
-    const category = params['category'];
-    console.log('Category from query params:', category);
-
-    // Call fetchProducts with category to filter the products
-    this.fetchProducts(category);
-  });
-}
-
-  // This method will be called when filters change (category, price, etc.)
-  onFiltersChanged(filters: any) {
-    // If a category is selected, fetch products by category
-    if (filters.category) {
-      this.fetchProducts(filters.category);
-    }
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const category = params['category'];
+      this.fetchProducts(category);
+    });
   }
 
-  // Fetch products by category (or all products if no category is specified)
-  fetchProducts(category?: string) {
-    this.loading = true; // Set loading to true before fetching data
+  // Called when filters are changed from the filter component
+  onFiltersChanged(filters: any) {
+    this.applyFilters(filters);
+  }
 
-    // Call the service to get products by category
+  // Fetch products (filtered by category server-side if passed)
+  fetchProducts(category?: string) {
+    this.loading = true;
     this.productService.getProducts(category).subscribe(
       (data) => {
-        console.log('API Response:', data); // Log the full response
-        console.log(category);
-        // Assign data to products
-        this.products = data;
-
-        console.log('Products:', this.products); // Log the processed products array
-        this.loading = false; // Set loading to false after fetching data
+        this.allProducts = data;
+        this.products = data; // initially show all
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching products:', error);
-        this.loading = false; // Set loading to false even in case of error
+        this.loading = false;
       }
     );
   }
+
+  // Apply filters client-side on allProducts
+  applyFilters(filters: any) {
+    this.products = this.allProducts.filter(product => {
+      const matchCategory = !filters.category || product.category === filters.category;
+      const matchPriceMin = filters.priceMin == null || product.price >= filters.priceMin;
+      const matchPriceMax = filters.priceMax == null || product.price <= filters.priceMax;
+      const matchRating = filters.ratingMin == null || product.rating >= filters.ratingMin;
+
+      return matchCategory && matchPriceMin && matchPriceMax && matchRating;
+    });
+  }
 }
+
