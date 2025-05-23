@@ -47,7 +47,7 @@ export class AccountComponent implements OnInit {
     console.log('Retrieved token from localStorage:', token); // ✅ Log the token
 
     if (token) {
-      this.http.get('http://127.0.0.1:5000/api/user', {
+      this.http.get('https://flask-backend-577718864894.europe-west1.run.app//api/user', {
         headers: { Authorization: `Bearer ${token}` },
       }).subscribe({
         next: (response: any) => {
@@ -82,7 +82,7 @@ export class AccountComponent implements OnInit {
     };
 
     // Send updated data to the backend
-    this.http.put('http://127.0.0.1:5000/api/user', updatedData, {
+    this.http.put('https://flask-backend-577718864894.europe-west1.run.app/api/user', updatedData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('cyber_token')}`,
       },

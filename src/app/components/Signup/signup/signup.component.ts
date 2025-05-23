@@ -46,7 +46,7 @@ export class SignupComponent {
       isAdmin: this.isAdmin,
     };
 
-    this.http.post('http://localhost:5000/api/signup', userData).subscribe({
+    this.http.post('https://flask-backend-577718864894.europe-west1.run.app//api/signup', userData).subscribe({
       next: (response) => {
         alert('Signup successful!');
         this.router.navigate(['/login']);

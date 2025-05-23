@@ -19,8 +19,8 @@ export interface Product {
   providedIn: 'root',
 })
 export class ProductService {
-  private postProductsRoute = 'http://localhost:5000/api/add-products';
-  private getProductsRoute = 'http://localhost:5000/api/get-all-products';
+  private postProductsRoute = 'https://flask-backend-577718864894.europe-west1.run.app//api/add-products';
+  private getProductsRoute = 'https://flask-backend-577718864894.europe-west1.run.app//api/get-all-products';
 
   constructor(private http: HttpClient) {}
 

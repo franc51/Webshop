@@ -29,7 +29,7 @@ export class LoginComponent {
       password: this.password,
     };
 
-    this.http.post('http://127.0.0.1:5000/api/login', loginData).subscribe({
+    this.http.post('https://flask-backend-577718864894.europe-west1.run.app//api/login', loginData).subscribe({
       next: (response: any) => {
         console.log('Login successful', response);
 
