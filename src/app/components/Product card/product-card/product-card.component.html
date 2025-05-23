@@ -1,32 +1,41 @@
 <div class="product_card">
   <img
-  class="fav"
-  [src]="isFavorite ? '/assets/images/fav.png' : '/assets/images/unfav.png'"
-  alt="Toggle favorite"
-  (click)="toggleFavorite()"
-/>
-<img *ngIf="product.newArrival" class="flag_new" src="/assets/images/new.png" alt="">
+    class="fav"
+    [src]="isFavorite ? '/assets/images/fav.png' : '/assets/images/unfav.png'"
+    alt="Toggle favorite"
+    (click)="toggleFavorite()"
+  />
+  <img
+    *ngIf="product.newArrival"
+    class="flag_new"
+    src="/assets/images/new.png"
+    alt=""
+  />
 
   <div class="product_card_info">
     <img [src]="product.pictureUrl" alt="{{ product.name }}" />
     <p>{{ product.name }}</p>
     <div class="rating">
-  <div class="rating">
-  <!-- Filled stars -->
-  <span class="star filled">★★★★★</span>
-  <p class="review_nr">5 (<a href="#">240</a>)</p>
+      <div class="rating">
+        <!-- Filled stars -->
+        <span class="star filled">★★★★★</span>
+        <p class="review_nr">5 (240)</p>
 
-  <!-- Empty stars -->
-  <span class="star"></span>
-</div>
-</div>
-    <h2>
-      {{ getMajorMinorParts(product.price).major }}
-      <span class="price_minor">
-        ,{{ getMajorMinorParts(product.price).minor }}
-      </span>
-      Lei
-    </h2>
-    <button>Buy Now</button>
+        <!-- Empty stars -->
+        <span class="star"></span>
+      </div>
+    </div>
+    <div class="price_and_buy_btn">
+      <h2>
+        {{ getMajorMinorParts(product.price).major }}
+        <span class="price_minor">
+          ,{{ getMajorMinorParts(product.price).minor }}
+        </span>
+        Lei
+      </h2>
+      <a href="" class="add_to_cart_btn"
+        ><img src="/assets/images/shopping-cart.png" alt=""
+      /></a>
+    </div>
   </div>
 </div>
