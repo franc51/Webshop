@@ -192,3 +192,5 @@ def get_products():
     product_list = [{**p, '_id': str(p['_id'])} for p in products]
     return jsonify(product_list), 200
 
+port = int(os.environ.get("PORT", 8080))
+app.run(host="0.0.0.0", port=port)
