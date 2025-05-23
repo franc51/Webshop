@@ -10,7 +10,8 @@
       {
         "source": "**",
         "run": {
-          "serviceId": "flask-backend"
+          "serviceId": "flask-backend",
+          "region": "europe-west1"
         }
       },
       {
