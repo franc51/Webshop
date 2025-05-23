@@ -20,8 +20,7 @@ const firebaseConfig = {
   storageBucket: "cyber-aed44.firebasestorage.app",
   messagingSenderId: "535759361456",
   appId: "1:535759361456:web:f2fcf0901b00e5b8b07275",
-  measurementId: "G-R7F3HRY9MT"
-};
+  measurementId: "G-HPRJZY6Z1M"};
 @Component({
   selector: 'app-root',
   standalone: true,
