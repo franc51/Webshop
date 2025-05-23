@@ -8,10 +8,9 @@
     ],
     "rewrites": [
       {
-        "source": "/api/**",
+        "source": "**",
         "run": {
-          "serviceId": "flask-backend",
-          "region": "us-central1"
+          "serviceId": "flask-backend"
         }
       },
       {
