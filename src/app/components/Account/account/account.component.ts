@@ -8,6 +8,8 @@ import { OrderHistoryComponent } from '../../Order History/order-history/order-h
 import { CreditCardsComponent } from '../../Credit-cards/credit-cards/credit-cards.component';
 import { AddressesComponent } from '../../Addresses/addresses/addresses.component';
 
+import { environment } from '../../../../../environment';
+
 @Component({
   selector: 'app-account',
   standalone: true,
@@ -47,7 +49,7 @@ export class AccountComponent implements OnInit {
     console.log('Retrieved token from localStorage:', token); // ✅ Log the token
 
     if (token) {
-      this.http.get('https://flask-backend-577718864894.europe-west1.run.app//api/user', {
+      this.http.get('${environment.apiUrl}/api/user', {
         headers: { Authorization: `Bearer ${token}` },
       }).subscribe({
         next: (response: any) => {
@@ -82,7 +84,7 @@ export class AccountComponent implements OnInit {
     };
 
     // Send updated data to the backend
-    this.http.put('https://flask-backend-577718864894.europe-west1.run.app/api/user', updatedData, {
+    this.http.put('${environment.apiUrl}/api/user', updatedData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('cyber_token')}`,
       },

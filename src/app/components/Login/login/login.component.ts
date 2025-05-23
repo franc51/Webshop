@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SpinnerComponent } from '../../Spinner/spinner/spinner.component';
+import { environment } from '../../../../../environment';
 
 @Component({
   selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent {
       password: this.password,
     };
 
-    this.http.post('https://flask-backend-577718864894.europe-west1.run.app//api/login', loginData).subscribe({
+    this.http.post('${environment.apiUrl}/api/login', loginData).subscribe({
       next: (response: any) => {
         console.log('Login successful', response);
 

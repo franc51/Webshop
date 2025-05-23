@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../../../../environment';
+
 // best practice
 export interface Product {
   _id: string;
@@ -19,8 +21,8 @@ export interface Product {
   providedIn: 'root',
 })
 export class ProductService {
-  private postProductsRoute = 'https://flask-backend-577718864894.europe-west1.run.app//api/add-products';
-  private getProductsRoute = 'https://flask-backend-577718864894.europe-west1.run.app//api/get-all-products';
+  private postProductsRoute = '${environment.apiUrl}/api/add-products';
+  private getProductsRoute = '${environment.apiUrl}/api/get-all-products';
 
   constructor(private http: HttpClient) {}
 

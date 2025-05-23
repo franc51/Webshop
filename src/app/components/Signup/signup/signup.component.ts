@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SpinnerComponent } from '../../Spinner/spinner/spinner.component';
 import { UserModel } from './user.model';
+import { environment } from '../../../../../environment';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -46,7 +47,7 @@ export class SignupComponent {
       isAdmin: this.isAdmin,
     };
 
-    this.http.post('https://flask-backend-577718864894.europe-west1.run.app//api/signup', userData).subscribe({
+    this.http.post('${environment.apiUrl}/api/signup', userData).subscribe({
       next: (response) => {
         alert('Signup successful!');
         this.router.navigate(['/login']);
