@@ -192,6 +192,3 @@ def get_products():
     product_list = [{**p, '_id': str(p['_id'])} for p in products]
     return jsonify(product_list), 200
 
-# Run the app
-if __name__ == '__main__':
-    app.run(debug=True)
