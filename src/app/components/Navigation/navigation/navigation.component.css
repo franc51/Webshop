@@ -67,11 +67,12 @@ img {
   color: white !important;
   font-weight: 900;
   border-radius: 50%;
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 1.1rem;
+  width: 1.1rem;
   position: absolute;
   top: -20%;
   right: -50%;
+  font-size: 0.7rem !important;
 }
 
 .count_color {
@@ -181,11 +182,11 @@ input::placeholder {
   }
 
   li {
-    padding: 1rem;
+    padding: 0.7rem;
     margin: 0;
-    border-bottom: 1px solid rgba(134, 134, 134, 0.267);
     border-radius: 0.5rem;
-    box-shadow: 3px 5px 5px 5px rgba(204, 204, 204, 0.582);
+    box-shadow: 3px 3px 10px 5px rgba(204, 204, 204, 0.521);
+    font-size: 1.2rem;
   }
 
   /* Input field on mobile */

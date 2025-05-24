@@ -25,12 +25,12 @@
 }
 .add_to_cart_btn {
   padding: 0.2rem;
-  border: 2px solid rgb(87, 87, 87);
-  background-color: #0011ff15;
+  border: none;
+  background-color: #0011ff36;
   border-radius: 4px;
   cursor: pointer;
   position: absolute;
-  top: 83%;
+  top: 84%;
   right: 7%;
   margin-top: 0.7rem;
   width: 2.2rem;
@@ -63,6 +63,8 @@
   top: 0;
   right: 0;
   height: 1.5rem;
+  background-color: white;
+  border-radius: 48%;
 }
 .fav:hover {
   scale: 1.1;
@@ -124,9 +126,9 @@
 
 @media screen and (max-width: 700px) {
   .product_card {
-    width: 9.1rem;
+    width: 12.5rem;
     height: 17rem;
-    padding: 0 1rem;
+    padding: 0 0.5rem;
     padding-bottom: 1rem;
   }
   .product_card_info button {
@@ -168,5 +170,39 @@
   .add_to_cart_btn img {
     height: 1.4rem;
     padding: 0.1rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .product_card {
+    width: 12.2rem;
+    height: 17rem;
+    padding: 0 0.5rem;
+    padding-bottom: 1rem;
+  }
+}
+@media screen and (max-width: 440px) {
+  .product_card {
+    width: 11.8rem;
+  }
+}
+@media screen and (max-width: 430px) {
+  .product_card {
+    width: 11.5rem;
+  }
+}
+@media screen and (max-width: 420px) {
+  .product_card {
+    width: 11.2rem;
+  }
+}
+@media screen and (max-width: 410px) {
+  .product_card {
+    width: 10.7rem;
+  }
+}
+@media screen and (max-width: 400px) {
+  .product_card {
+    width: 12rem;
   }
 }

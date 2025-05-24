@@ -74,22 +74,20 @@ def user_info():
     if not token:
         return jsonify({'message': 'Token is missing!'}), 401
     try:
-        # Decode the JWT token
-        token = token.split(" ")[1]  # Get token from "Bearer <token>"
+        token = token.split(" ")[1]  # Bearer token
         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
         user_id = decoded['user_id']
-        # Handle GET request to retrieve user info
+
         if request.method == 'GET':
             user = users_collection.find_one({'_id': ObjectId(user_id)})
             if not user:
                 return jsonify({'message': 'User not found'}), 404
-            # Respond with the user info (excluding password)
             user_info = {
                 'username': user['username'],
                 'email': user['email']
             }
             return jsonify(user_info)
-        # Handle PUT request to update user info
+
         if request.method == 'PUT':
             data = request.json
             current_password = data.get('password')
@@ -97,21 +95,23 @@ def user_info():
             user = users_collection.find_one({'_id': ObjectId(user_id)})
             if not user:
                 return jsonify({'message': 'User not found'}), 404
-            # Check current password
             if not bcrypt.checkpw(current_password.encode('utf-8'), user['password']):
                 return jsonify({'message': 'Incorrect current password'}), 400
-            # Update user information
             update_data = {'username': data['username'], 'email': data['email']}
             if new_password:
-                # Hash the new password before updating
                 hashed_new_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
                 update_data['password'] = hashed_new_password
             users_collection.update_one({'_id': ObjectId(user_id)}, {'$set': update_data})
             return jsonify({'message': 'Account updated successfully'}), 200
+
     except jwt.ExpiredSignatureError:
         return jsonify({'message': 'Token has expired'}), 401
     except jwt.InvalidTokenError:
         return jsonify({'message': 'Invalid token'}), 401
+    except Exception as e:
+        print(f"Unexpected error in /api/user: {e}")  # Log full error on the server console
+        return jsonify({'message': 'Internal server error'}), 500
+
 
 @app.route('/api/add-products', methods=['POST'])
 def add_product():
