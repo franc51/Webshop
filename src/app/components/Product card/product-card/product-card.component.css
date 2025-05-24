@@ -30,10 +30,10 @@
   border-radius: 4px;
   cursor: pointer;
   position: absolute;
-  top: 84%;
+  top: 85%;
   right: 7%;
   margin-top: 0.7rem;
-  width: 2.2rem;
+  width: 2rem;
 }
 .add_to_cart_btn img {
   height: 1.5rem;
@@ -56,15 +56,14 @@
   left: 10%;
 }
 .fav {
-  padding: 0.5rem;
-  margin: 0.3rem;
+  padding: 0.4rem;
+  margin: 0.5rem;
   cursor: pointer;
   position: absolute;
   top: 0;
   right: 0;
   height: 1.5rem;
-  background-color: white;
-  border-radius: 48%;
+  background-color: rgba(255, 255, 255, 0);
 }
 .fav:hover {
   scale: 1.1;

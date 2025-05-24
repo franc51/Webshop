@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class FavoriteService {
-  private storageKey = 'favoriteProducts';
+@Injectable({ providedIn: 'root' })
+export class CartService {
+  private storageKey = 'cartProducts';
 
-  getFavorites(): string[] {
+  getProducts(): string[] {
     return JSON.parse(localStorage.getItem(this.storageKey) || '[]');
   }
 
   getCount(): number {
-    return this.getFavorites().length;
+    return this.getProducts().length;
   }
 
   add(id: string) {
-    const favs = this.getFavorites();
+    const favs = this.getProducts();
     if (!favs.includes(id)) {
       favs.push(id);
       localStorage.setItem(this.storageKey, JSON.stringify(favs));
@@ -23,11 +21,11 @@ export class FavoriteService {
   }
 
   remove(id: string) {
-    const favs = this.getFavorites().filter((f) => f !== id);
+    const favs = this.getProducts().filter((f) => f !== id);
     localStorage.setItem(this.storageKey, JSON.stringify(favs));
   }
 
-  isFavorite(id: string): boolean {
-    return this.getFavorites().includes(id);
+  isInCart(id: string): boolean {
+    return this.getProducts().includes(id);
   }
 }

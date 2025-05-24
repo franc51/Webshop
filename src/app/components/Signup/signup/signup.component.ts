@@ -32,11 +32,18 @@ export class SignupComponent {
   confirmPassword = '';
 
   onSubmit() {
+    if (!this.name || !this.email || !this.password || !this.confirmPassword) {
+      alert('All fields are required!');
+      return;
+    }
+
     if (this.password !== this.confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
+
     this.isLoading = true;
+
     const userData: UserModel = {
       name: this.name,
       email: this.email,
@@ -48,14 +55,19 @@ export class SignupComponent {
     };
 
     this.http.post(`${environment.apiUrl}/api/signup`, userData).subscribe({
-      next: (response) => {
+      next: () => {
         alert('Signup successful!');
         this.router.navigate(['/login']);
       },
       error: (error) => {
-        alert('Signup failed: ' + error.error.message || 'Unknown error');
-        console.error(error);
+        const message =
+          error?.error?.error ||
+          error?.error?.message ||
+          'Signup failed. Please try again.';
+        alert(message);
+        console.error('Signup error:', error);
         this.isLoading = false;
+        console.log(userData);
       },
       complete: () => {
         this.isLoading = false;

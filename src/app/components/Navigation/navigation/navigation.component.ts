@@ -16,11 +16,15 @@ import { FavoriteService } from '../../Favorites/Favorites-service/favorite.serv
 export class NavigationComponent {
   menuOpen = false;
 
-   favoriteCount = 0;
+  favoriteCount = 0;
 
-  constructor(private http: HttpClient, private router: Router, private favoriteService: FavoriteService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private favoriteService: FavoriteService
+  ) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.updateFavoriteCount();
   }
   updateFavoriteCount() {

@@ -24,9 +24,13 @@
           alt="favorite-icon"
           title="Favorites"
         />
-        <span class="bubble count_color count_font_size">{{
-          favoriteCount
-        }}</span>
+        <span
+          class="bubble fav_btn_style hide_element"
+          [class.bubble]="favoriteCount > 0"
+          [class.fav_btn_style]="favoriteCount > 0"
+          [class.hide_element]="favoriteCount == 0"
+          >{{ favoriteCount }}</span
+        >
       </a>
       <a routerLink="/cart" (click)="closeMenu()">
         <img
@@ -34,7 +38,7 @@
           alt="shopping-cart"
           title="Cart"
         />
-        <span class="bubble count_color count_font_size">3</span>
+        <span class="bubble hide_element"></span>
       </a>
       <a
         routerLink="/login"

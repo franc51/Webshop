@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductService } from '../../Admin/Add-product/product.service';
+import {
+  Product,
+  ProductService,
+} from '../../Admin/Add-product/product.service';
 import { FavoriteService } from '../Favorites-service/favorite.service';
 import { ProductCardComponent } from '../../Product card/product-card/product-card.component';
 import { SpinnerComponent } from '../../Spinner/spinner/spinner.component';
@@ -10,7 +13,7 @@ import { NgFor, NgIf } from '@angular/common';
   standalone: true,
   imports: [NgIf, NgFor, ProductCardComponent, SpinnerComponent],
   templateUrl: './favorites.component.html',
-  styleUrl: './favorites.component.css'
+  styleUrl: './favorites.component.css',
 })
 export class FavoritesComponent implements OnInit {
   favoriteProducts: Product[] = [];
@@ -29,10 +32,10 @@ export class FavoritesComponent implements OnInit {
     const favoriteIds = this.favoriteService.getFavorites();
     this.isLoading = true;
     this.productService.getProducts().subscribe((allProducts: Product[]) => {
-      this.favoriteProducts = allProducts.filter(product =>
+      this.favoriteProducts = allProducts.filter((product) =>
         favoriteIds.includes(product._id)
       );
-      this.isLoading = false
+      this.isLoading = false;
     });
   }
 }

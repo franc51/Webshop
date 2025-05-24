@@ -11,22 +11,27 @@ import { CommonModule } from '@angular/common';
 export class ProductCardComponent {
   @Input() product!: Product;
 
-    isFavorite = false;
+  isFavorite: boolean = false;
+  isInCart: boolean = false;
 
   ngOnInit() {
     this.loadFavoriteState();
   }
 
   loadFavoriteState() {
-    const favorites = JSON.parse(localStorage.getItem('favoriteProducts') || '[]');
+    const favorites = JSON.parse(
+      localStorage.getItem('favoriteProducts') || '[]'
+    );
     this.isFavorite = favorites.includes(this.product._id);
   }
 
   toggleFavorite() {
-    let favorites: string[] = JSON.parse(localStorage.getItem('favoriteProducts') || '[]');
+    let favorites: string[] = JSON.parse(
+      localStorage.getItem('favoriteProducts') || '[]'
+    );
 
     if (this.isFavorite) {
-      favorites = favorites.filter(id => id !== this.product._id);
+      favorites = favorites.filter((id) => id !== this.product._id);
     } else {
       favorites.push(this.product._id);
     }
@@ -35,6 +40,20 @@ export class ProductCardComponent {
     this.isFavorite = !this.isFavorite;
   }
 
+  toggleAddToCart() {
+    let cart: string[] = JSON.parse(
+      localStorage.getItem('cartProducts') || '[]'
+    );
+
+    if (this.isInCart) {
+      cart = cart.filter((id) => id !== this.product._id);
+    } else {
+      cart.push(this.product._id);
+    }
+
+    localStorage.setItem('cartProducts', JSON.stringify(cart));
+    this.isInCart = !this.isInCart;
+  }
 
   getMajorMinorParts(price: number) {
     const [major, minor] = price

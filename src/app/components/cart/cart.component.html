@@ -1,0 +1,23 @@
+<h2 class="favorite_name">Your favorites list</h2>
+<app-spinner *ngIf="isLoading"></app-spinner>
+<div class="filters_and_products">
+  <!-- No filters for favorites, but structure matches -->
+  <div class="product_list_wrapper">
+    <div
+      class="product_list"
+      [class.favoriteProducts_single]="cartProducts.length === 1"
+    >
+      <div *ngIf="cartProducts.length === 0" class="empty_cart">
+        <h2>Your cart is empty, start adding products to cart.</h2>
+        <img
+          src="https://img.freepik.com/premium-vector/shopping-cart-with-cross-mark-wireless-paymant-icon-shopping-bag-failure-paymant-sign-online-shopping-vector_662353-912.jpg"
+          alt="Empty cart"
+        />
+      </div>
+
+      <div *ngFor="let product of cartProducts">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    </div>
+  </div>
+</div>

@@ -75,12 +75,14 @@ img {
   font-size: 0.7rem !important;
 }
 
-.count_color {
+.fav_btn_style {
   color: var(--count_color);
-}
-.count_font_size {
   font-size: var(--count_font_size);
 }
+.hide_element {
+  display: none;
+}
+
 img:hover {
   scale: 1.1;
 }

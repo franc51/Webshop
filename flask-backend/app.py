@@ -83,7 +83,7 @@ def user_info():
             if not user:
                 return jsonify({'message': 'User not found'}), 404
             user_info = {
-                'username': user['username'],
+                'name': user['name'],
                 'email': user['email']
             }
             return jsonify(user_info)
