@@ -5,7 +5,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 
+/* Services import */
 import { FavoriteService } from '../../Favorites/Favorites-service/favorite.service';
+import { CartService } from '../../cart/cart.service';
 @Component({
   selector: 'app-navigation',
   standalone: true,
@@ -17,18 +19,24 @@ export class NavigationComponent {
   menuOpen = false;
 
   favoriteCount = 0;
+  cartCount = 0;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private favoriteService: FavoriteService
+    private favoriteService: FavoriteService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
     this.updateFavoriteCount();
+    this.updatecartCount();
   }
   updateFavoriteCount() {
     this.favoriteCount = this.favoriteService.getCount();
+  }
+  updatecartCount() {
+    this.cartCount = this.cartService.getCount();
   }
 
   toggleMenu() {

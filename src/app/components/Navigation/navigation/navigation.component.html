@@ -38,7 +38,13 @@
           alt="shopping-cart"
           title="Cart"
         />
-        <span class="bubble hide_element"></span>
+        <span
+          class="bubble hide_element"
+          [class.bubble]="cartCount > 0"
+          [class.fav_btn_style]="cartCount > 0"
+          [class.hide_element]="cartCount == 0"
+          >{{ cartCount }}</span
+        >
       </a>
       <a
         routerLink="/login"
