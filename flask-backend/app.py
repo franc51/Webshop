@@ -27,11 +27,11 @@ product_collection = db['products']
 @app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.json
-    username = data.get('username')
+    name = data.get('name')
     email = data.get('email')
     password = data.get('password')
     # Check for missing fields
-    if not username or not email or not password:
+    if not name or not email or not password:
         return jsonify({'message': 'Missing fields'}), 400
     # Check if user already exists
     if users_collection.find_one({'email': email}):
@@ -40,7 +40,7 @@ def signup():
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
     # Insert new user into the database
     users_collection.insert_one({
-        'username': username,
+        'name': name,
         'email': email,
         'password': hashed_password
     })

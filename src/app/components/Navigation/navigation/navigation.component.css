@@ -56,6 +56,24 @@ img {
   gap: 1.5rem;
   cursor: pointer;
 }
+.nav_btns a {
+  position: relative;
+}
+.bubble {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  color: white !important;
+  font-weight: 900;
+  border-radius: 50%;
+  height: 1.2rem;
+  width: 1.2rem;
+  position: absolute;
+  top: -20%;
+  right: -50%;
+}
+
 .count_color {
   color: var(--count_color);
 }
@@ -65,7 +83,6 @@ img {
 img:hover {
   scale: 1.1;
 }
-
 nav {
   display: flex;
   gap: 1rem;
