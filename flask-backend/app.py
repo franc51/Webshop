@@ -1,12 +1,13 @@
 import os
 from flask import Flask, request, jsonify
-from bson import ObjectId
 from flask_cors import CORS
 from pymongo import MongoClient
 from dotenv import load_dotenv
 import bcrypt
 import jwt
 import datetime
+from bson import ObjectId
+from bson.errors import InvalidId
 
 load_dotenv()
 # Initialize Flask app
@@ -74,12 +75,17 @@ def user_info():
     if not token:
         return jsonify({'message': 'Token is missing!'}), 401
     try:
-        token = token.split(" ")[1]  # Bearer token
+        token = token.split(" ")[1]  # Remove "Bearer"
         decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-        user_id = decoded['user_id']
-
+        user_id = decoded.get('user_id')
+        # ✅ Safely convert to ObjectId
+        try:
+            object_id = ObjectId(user_id)
+        except InvalidId:
+            return jsonify({'message': 'Invalid user ID format'}), 400
+        # --- GET: Fetch user info ---
         if request.method == 'GET':
-            user = users_collection.find_one({'_id': ObjectId(user_id)})
+            user = users_collection.find_one({'_id': object_id})
             if not user:
                 return jsonify({'message': 'User not found'}), 404
             user_info = {
@@ -87,32 +93,37 @@ def user_info():
                 'email': user['email']
             }
             return jsonify(user_info)
-
+        # --- PUT: Update user info ---
         if request.method == 'PUT':
             data = request.json
             current_password = data.get('password')
             new_password = data.get('newPassword')
-            user = users_collection.find_one({'_id': ObjectId(user_id)})
+            new_name = data.get('username')
+            new_email = data.get('email')
+            user = users_collection.find_one({'_id': object_id})
             if not user:
                 return jsonify({'message': 'User not found'}), 404
+            # Check if current password is correct
             if not bcrypt.checkpw(current_password.encode('utf-8'), user['password']):
                 return jsonify({'message': 'Incorrect current password'}), 400
-            update_data = {'username': data['username'], 'email': data['email']}
+            update_data = {}
+            if new_name:
+                update_data['name'] = new_name
+            if new_email:
+                update_data['email'] = new_email
             if new_password:
                 hashed_new_password = bcrypt.hashpw(new_password.encode('utf-8'), bcrypt.gensalt())
                 update_data['password'] = hashed_new_password
-            users_collection.update_one({'_id': ObjectId(user_id)}, {'$set': update_data})
+            users_collection.update_one({'_id': object_id}, {'$set': update_data})
             return jsonify({'message': 'Account updated successfully'}), 200
-
     except jwt.ExpiredSignatureError:
         return jsonify({'message': 'Token has expired'}), 401
     except jwt.InvalidTokenError:
         return jsonify({'message': 'Invalid token'}), 401
     except Exception as e:
-        print(f"Unexpected error in /api/user: {e}")  # Log full error on the server console
+        print(f"❌ Unexpected error in /api/user: {e}")
         return jsonify({'message': 'Internal server error'}), 500
-
-
+    
 @app.route('/api/add-products', methods=['POST'])
 def add_product():
     data = request.json

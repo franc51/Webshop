@@ -23,7 +23,6 @@
   justify-content: space-evenly;
 }
 .product {
-  background-color: rgba(243, 243, 243, 0.637);
   padding: 0 2rem;
   padding-top: 1rem;
   height: 8rem;
@@ -38,20 +37,20 @@
   color: rgb(66, 66, 66);
   cursor: pointer;
   transition: 0.2s ease-in;
-}
-.product h4 {
-  margin: 6px;
-}
-.product img {
-  scale: 0.8;
+  box-shadow: 1px 2px 10px 3px rgba(128, 128, 128, 0.226);
 }
 .product:hover {
-  img {
-    scale: 0.9;
-  }
-  background-color: white;
+  box-shadow: 1px 2px 10px 3px rgba(128, 128, 128, 0.521);
 }
-
+.product h4 {
+  margin: 4px;
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+.product img {
+  height: 3rem;
+}
 .category_arrows img {
   scale: 0.6;
   cursor: pointer;

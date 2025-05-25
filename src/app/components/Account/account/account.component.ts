@@ -9,6 +9,7 @@ import { CreditCardsComponent } from '../../Credit-cards/credit-cards/credit-car
 import { AddressesComponent } from '../../Addresses/addresses/addresses.component';
 
 import { environment } from '../../../../../environment';
+import { AuthService } from '../../Navigation/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -32,15 +33,28 @@ export class AccountComponent implements OnInit {
   newPassword: string = '';
   confirmNewPassword: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private auth: AuthService
+  ) {}
 
   showFeatNotAvailable() {
     alert('Feature not available yet!');
   }
 
   ngOnInit() {
-    // Load the user's current info from the server when the page loads
-    this.getUserInfo();
+    this.auth.enforceLogin(); // out if not logged
+
+    this.auth.getUserInfo()?.subscribe({
+      next: (user: any) => {
+        this.name = user.username;
+        this.email = user.email;
+      },
+      error: (err) => {
+        console.error('Failed to fetch user info:', err);
+      },
+    });
   }
 
   logOut() {
@@ -49,37 +63,6 @@ export class AccountComponent implements OnInit {
   }
   goToAddProducts() {
     this.router.navigate(['/add-new-product']);
-  }
-
-  getUserInfo() {
-    const token = localStorage.getItem('cyber_token');
-    console.log('Retrieved token from localStorage:', token); // ✅ Log the token
-
-    if (token) {
-      this.http
-        .get(`${environment.apiUrl}/api/user`, {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .subscribe({
-          next: (response: any) => {
-            console.log('Fetched user data from backend:', response); // ✅ Log full response
-            this.name = response.username;
-            this.email = response.email;
-            console.log(
-              'Updated component state: name =',
-              this.name,
-              ', email =',
-              this.email
-            ); // ✅ Log state update
-          },
-          error: (error) => {
-            console.error('❌ Error fetching user info:', error); // ✅ Log full error
-            alert('Please Log in');
-          },
-        });
-    } else {
-      console.warn('⚠️ No auth_token found in localStorage');
-    }
   }
 
   updateUser() {

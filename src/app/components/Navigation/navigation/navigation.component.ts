@@ -67,11 +67,24 @@ export class NavigationComponent {
   }
 
   checkIfLoggedIn() {
-    console.log('checking token...'); // ✅ Confirm it's running
+    console.log('checking token...');
     const token = localStorage.getItem('cyber_token');
-    if (token) {
-      this.router.navigate(['/account']);
-    } else {
+    if (!token) {
+      this.router.navigate(['/login']);
+      return;
+    }
+    try {
+      // Decode JWT payload (middle part of token)
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      // Check expiration
+      const isExpired = payload.exp * 1000 < Date.now();
+      if (isExpired) {
+        this.router.navigate(['/login']);
+      } else {
+        this.router.navigate(['/account']);
+      }
+    } catch (err) {
+      console.error('Invalid token format', err);
       this.router.navigate(['/login']);
     }
   }

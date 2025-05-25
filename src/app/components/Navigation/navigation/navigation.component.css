@@ -114,9 +114,8 @@ input::placeholder {
 /* Logo styles */
 .logo {
   color: var(--nav_logo_color);
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-weight: 900;
-  font-family: "Inter";
+  font-family: "Saira Stencil One";
+  font-weight: 100;
   font-size: 1.8rem;
   margin: 0;
 }
