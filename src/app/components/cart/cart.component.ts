@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Product, ProductService } from '../Admin/Add-product/product.service';
 import { CartService } from './cart.service';
 import { SpinnerComponent } from '../Spinner/spinner/spinner.component';
-import { ProductCardComponent } from '../Product card/product-card/product-card.component';
-
+import { ConfettiService } from '../Shared/confetti.service';
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -22,12 +21,9 @@ export class CartComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private confetti: ConfettiService
   ) {}
-
-  ngOnInit() {
-    this.loadCartProducts();
-  }
 
   loadCartProducts() {
     this.isLoading = true;
@@ -40,10 +36,15 @@ export class CartComponent implements OnInit {
         this.cartProducts = allProducts.filter((product) =>
           ids.includes(product._id)
         );
-        this.total = this.cartProducts.reduce(
-          (sum, p) => sum + p.price * (this.quantities[p._id] || 1),
-          0
+        this.total = parseFloat(
+          this.cartProducts
+            .reduce(
+              (sum, p) => sum + p.price * (this.quantities[p._id] || 1),
+              0
+            )
+            .toFixed(2)
         );
+
         this.isLoading = false;
       },
       error: (err) => {
@@ -84,5 +85,47 @@ export class CartComponent implements OnInit {
       (sum, p) => sum + p.price * (this.quantities[p._id] || 1),
       0
     );
+  }
+
+  addresses: string[] = [];
+  selectedAddress: string = '';
+  creditCards: string[] = [];
+  selectedCard: string = '';
+
+  loadSavedAddresses() {
+    // Example: replace this with your real service
+    this.addresses = [
+      '123 Main St, Cityville',
+      '456 Oak Dr, Townsville',
+      '789 Pine Ln, Hamletburg',
+    ];
+
+    // Optionally select the first by default
+    this.selectedAddress = this.addresses[0] || '';
+  }
+
+  ngOnInit() {
+    this.loadCartProducts();
+    this.loadSavedAddresses();
+    this.loadSavedCards(); // 👈 Load credit cards
+  }
+
+  loadSavedCards() {
+    // Replace this with your actual card-fetching logic
+    this.creditCards = [
+      '4111111111111111',
+      '5500000000000004',
+      '340000000000009',
+    ];
+
+    this.selectedCard = this.creditCards[0] || '';
+  }
+
+  checkout() {
+    this.confetti.launchBasicConfetti();
+    this.cartService.clearCart();
+    this.cartProducts = [];
+    this.quantities = {};
+    this.total = 0;
   }
 }
