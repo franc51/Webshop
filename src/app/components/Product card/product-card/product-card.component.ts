@@ -1,6 +1,11 @@
 import { Component, Input, Output } from '@angular/core';
 import { Product } from '../../Admin/Add-product/product.service';
 import { CommonModule } from '@angular/common';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+import { ConfettiService } from '../../Shared/confetti.service';
+import { CartService } from '../../cart/cart.service';
 @Component({
   selector: 'app-product-card',
   standalone: true,
@@ -14,8 +19,11 @@ export class ProductCardComponent {
   isFavorite: boolean = false;
   isInCart: boolean = false;
 
+  constructor(private confetti: ConfettiService, private snackBar: MatSnackBar, private cartService: CartService){}
+
   ngOnInit() {
     this.loadFavoriteState();
+    this.isInCart = this.cartService.isInCart(this.product._id);
   }
 
   loadFavoriteState() {
@@ -40,20 +48,26 @@ export class ProductCardComponent {
     this.isFavorite = !this.isFavorite;
   }
 
-  toggleAddToCart() {
-    let cart: string[] = JSON.parse(
-      localStorage.getItem('cartProducts') || '[]'
-    );
+toggleAddToCart(event: Event) {
+  event.preventDefault();
 
-    if (this.isInCart) {
-      cart = cart.filter((id) => id !== this.product._id);
-    } else {
-      cart.push(this.product._id);
-    }
-
-    localStorage.setItem('cartProducts', JSON.stringify(cart));
-    this.isInCart = !this.isInCart;
+  if (this.isInCart) {
+    this.cartService.remove(this.product._id);
+  } else {
+    this.cartService.add(this.product._id);
   }
+
+  this.isInCart = !this.isInCart;
+
+  this.confetti.launchBasicConfetti();
+
+  this.snackBar.open('✅ Added to cart', 'Close', {
+    duration: 3000,
+    verticalPosition: 'bottom',
+    horizontalPosition: 'right',
+  });
+}
+
 
   getMajorMinorParts(price: number) {
     const [major, minor] = price

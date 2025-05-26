@@ -1,30 +1,26 @@
 <app-spinner *ngIf="isLoading"></app-spinner>
-<div class="cart">
-  <div class="cart_title">
-    <img
-      class="cart_bag"
-      src="https://pic.onlinewebfonts.com/thumbnails/icons_75297.svg"
-      alt=""
-    />
-    <h2 class="cart_name">Your Cart (feature started)</h2>
-  </div>
-  <!-- No filters for favorites, but structure matches -->
-  <div class="product_list_wrapper">
-    <div
-      class="product_list"
-      [class.favoriteProducts_single]="cartProducts.length === 1"
-    >
-      <div *ngIf="cartProducts.length === 0" class="empty_cart">
-        <h2>Your cart is empty, start adding products to cart.</h2>
-        <img
-          src="https://img.freepik.com/premium-vector/shopping-cart-with-cross-mark-wireless-paymant-icon-shopping-bag-failure-paymant-sign-online-shopping-vector_662353-912.jpg"
-          alt="Empty cart"
-        />
-      </div>
 
-      <div *ngFor="let product of cartProducts">
-        <app-product-card [product]="product"></app-product-card>
+<div *ngIf="!isLoading">
+  <h2>Your Cart</h2>
+
+  <div *ngIf="cartProducts.length === 0" class="empty-cart">
+    <p>Your cart is empty.</p>
+    <img src="https://img.freepik.com/premium-vector/shopping-cart-with-cross-mark-wireless-paymant-icon-shopping-bag-failure-paymant-sign-online-shopping-vector_662353-912.jpg" alt="Empty cart" />
+  </div>
+
+  <div *ngFor="let product of cartProducts" class="cart-item">
+    <img [src]="product.pictureUrl" alt="{{ product.name }}" />
+    <div class="info">
+      <h4>{{ product.name }}</h4>
+      <p>{{ product.price }} Lei</p>
+      <div>
+        <button (click)="removeFromCart(product._id)">Remove</button>
       </div>
     </div>
   </div>
+
+  <div *ngIf="cartProducts.length > 0" class="cart-total">
+    <h3>Total: {{ total }} Lei</h3>
+  </div>
 </div>
+

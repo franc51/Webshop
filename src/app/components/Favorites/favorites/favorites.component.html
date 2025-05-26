@@ -1,4 +1,4 @@
-<h2 class="favorite_name">Your favorites list</h2>
+<h2 class="favorite_name">Your Wishlist</h2>
 <app-spinner *ngIf="isLoading"></app-spinner>
 <div class="filters_and_products">
   <!-- No filters for favorites, but structure matches -->
@@ -8,7 +8,7 @@
       [class.favoriteProducts_single]="favoriteProducts.length === 1"
     >
       <div *ngIf="favoriteProducts.length === 0" class="no_products_available">
-        <p>No favorite products.</p>
+        <p>You don't have anything in your wishlist.</p>
         <img src="/assets/images/cross.png" alt="No products" />
       </div>
 
