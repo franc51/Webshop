@@ -18,7 +18,7 @@ export class CartComponent implements OnInit {
   total: number = 0;
   isLoading = false;
 
-    quantities: { [productId: string]: number } = {};
+  quantities: { [productId: string]: number } = {};
 
   constructor(
     private productService: ProductService,
@@ -29,58 +29,60 @@ export class CartComponent implements OnInit {
     this.loadCartProducts();
   }
 
-   loadCartProducts() {
+  loadCartProducts() {
     this.isLoading = true;
     const cartItems = this.cartService.getProducts();
+    this.quantities = { ...cartItems };
     const ids = Object.keys(cartItems);
-
 
     this.productService.getProducts().subscribe({
       next: (allProducts: Product[]) => {
-        this.cartProducts = allProducts.filter(product => ids.includes(product._id));
+        this.cartProducts = allProducts.filter((product) =>
+          ids.includes(product._id)
+        );
         this.total = this.cartProducts.reduce(
-          (sum, p) => sum + p.price * (this.quantities[p._id] || 1), 0);
+          (sum, p) => sum + p.price * (this.quantities[p._id] || 1),
+          0
+        );
         this.isLoading = false;
       },
       error: (err) => {
         console.error('Failed to load cart products', err);
         this.isLoading = false;
-      }
+      },
     });
   }
 
-   removeFromCart(productId: string) {
+  removeFromCart(productId: string) {
     this.cartService.remove(productId);
     this.loadCartProducts();
   }
 
-increaseQuantity(productId: string) {
-  const currentQty = this.quantities[productId] || 1;
-  this.updateQuantity(productId, currentQty + 1);
-}
-
-decreaseQuantity(productId: string) {
-  const currentQty = this.quantities[productId] || 1;
-  if (currentQty > 1) {
-    this.updateQuantity(productId, currentQty - 1);
-  } else {
-    // Optional: if quantity hits zero, remove product
-    this.removeFromCart(productId);
+  increaseQuantity(productId: string) {
+    const currentQty = this.quantities[productId] || 1;
+    this.updateQuantity(productId, currentQty + 1);
   }
-}
 
-updateQuantity(productId: string, qty: number) {
-  this.cartService.updateQuantity(productId, qty);
-  this.quantities[productId] = qty;
-  this.calculateTotal();
-}
+  decreaseQuantity(productId: string) {
+    const currentQty = this.quantities[productId] || 1;
+    if (currentQty > 1) {
+      this.updateQuantity(productId, currentQty - 1);
+    } else {
+      // Optional: if quantity hits zero, remove product
+      this.removeFromCart(productId);
+    }
+  }
 
-calculateTotal() {
-  this.total = this.cartProducts.reduce(
-    (sum, p) => sum + p.price * (this.quantities[p._id] || 1),
-    0
-  );
-}
+  updateQuantity(productId: string, qty: number) {
+    this.cartService.updateQuantity(productId, qty);
+    this.quantities[productId] = qty;
+    this.calculateTotal();
+  }
 
-
+  calculateTotal() {
+    this.total = this.cartProducts.reduce(
+      (sum, p) => sum + p.price * (this.quantities[p._id] || 1),
+      0
+    );
+  }
 }
