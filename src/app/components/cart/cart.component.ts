@@ -25,44 +25,56 @@ export class CartComponent implements OnInit {
     private confetti: ConfettiService
   ) {}
 
-  loadCartProducts() {
-    this.isLoading = true;
-    const cartItems = this.cartService.getProducts();
-    this.quantities = { ...cartItems };
-    const ids = Object.keys(cartItems);
-
-    this.productService.getProducts().subscribe({
-      next: (allProducts: Product[]) => {
-        this.cartProducts = allProducts.filter((product) =>
-          ids.includes(product._id)
-        );
-        this.total = parseFloat(
-          this.cartProducts
-            .reduce(
-              (sum, p) => sum + p.price * (this.quantities[p._id] || 1),
-              0
-            )
-            .toFixed(2)
-        );
-
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Failed to load cart products', err);
-        this.isLoading = false;
-      },
-    });
+    ngOnInit() {
+    this.loadCartProducts();
+    this.loadSavedAddresses();
+    this.loadSavedCards(); // 👈 Load credit cards
   }
+
+loadCartProducts() {
+  this.isLoading = true;
+
+  const cartItems = this.cartService.getProducts();
+  console.log('Cart items:', cartItems); // Debug
+
+  const ids = Object.keys(cartItems);
+
+  this.productService.getProducts().subscribe({
+    next: (allProducts: Product[]) => {
+      this.cartProducts = allProducts.filter(product =>
+        ids.includes(product._id)
+      );
+
+      // 👇 Use quantities only from cartItems to avoid desync
+      this.quantities = { ...cartItems };
+
+      this.total = parseFloat(
+        this.cartProducts
+          .reduce((sum, p) => sum + p.price * (this.quantities[p._id] || 1), 0)
+          .toFixed(2)
+      );
+
+      this.isLoading = false;
+    },
+    error: err => {
+      console.error('Failed to load cart products', err);
+      this.isLoading = false;
+    },
+  });
+}
+
 
   removeFromCart(productId: string) {
     this.cartService.remove(productId);
     this.loadCartProducts();
   }
 
-  increaseQuantity(productId: string) {
-    const currentQty = this.quantities[productId] || 1;
-    this.updateQuantity(productId, currentQty + 1);
-  }
+increaseQuantity(productId: string) {
+  this.cartService.add(productId);
+  setTimeout(() => this.loadCartProducts(), 50);
+}
+
+
 
   decreaseQuantity(productId: string) {
     const currentQty = this.quantities[productId] || 1;
@@ -74,11 +86,13 @@ export class CartComponent implements OnInit {
     }
   }
 
-  updateQuantity(productId: string, qty: number) {
-    this.cartService.updateQuantity(productId, qty);
-    this.quantities[productId] = qty;
-    this.calculateTotal();
-  }
+ updateQuantity(productId: string, qty: number) {
+  if (qty == null || isNaN(qty)) return;
+  this.cartService.updateQuantity(productId, qty);
+  this.quantities[productId] = qty;
+  this.calculateTotal();
+}
+
 
   calculateTotal() {
     this.total = this.cartProducts.reduce(
@@ -102,12 +116,6 @@ export class CartComponent implements OnInit {
 
     // Optionally select the first by default
     this.selectedAddress = this.addresses[0] || '';
-  }
-
-  ngOnInit() {
-    this.loadCartProducts();
-    this.loadSavedAddresses();
-    this.loadSavedCards(); // 👈 Load credit cards
   }
 
   loadSavedCards() {

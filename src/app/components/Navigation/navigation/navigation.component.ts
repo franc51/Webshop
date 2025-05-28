@@ -33,10 +33,14 @@ export class NavigationComponent {
     this.updatecartCount();
   }
   updateFavoriteCount() {
-    this.favoriteCount = this.favoriteService.getCount();
+    this.favoriteService.favoriteCount$.subscribe(count => {
+      this.favoriteCount = count
+    })
   }
   updatecartCount() {
-    this.cartCount = this.cartService.getCount();
+   this.cartService.cartCount$.subscribe(count => {
+      this.cartCount = count
+    })
   }
 
   toggleMenu() {

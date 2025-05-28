@@ -6,6 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ConfettiService } from '../../Shared/confetti.service';
 import { CartService } from '../../cart/cart.service';
+import { FavoriteService } from '../../Favorites/Favorites-service/favorite.service';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-product-card',
   standalone: true,
@@ -16,13 +18,13 @@ import { CartService } from '../../cart/cart.service';
 export class ProductCardComponent {
   @Input() product!: Product;
 
-  isFavorite: boolean = false;
+  isFavorite$!: Observable<boolean>;
   isInCart: boolean = false;
 
-  constructor(private confetti: ConfettiService, private snackBar: MatSnackBar, private cartService: CartService){}
+  constructor(private confetti: ConfettiService, private snackBar: MatSnackBar, private cartService: CartService, private favoriteService: FavoriteService){}
 
   ngOnInit() {
-    this.loadFavoriteState();
+    this.isFavorite$ = this.favoriteService.isFavorite(this.product._id);
     this.isInCart = this.cartService.isInCart(this.product._id);
   }
 
@@ -30,34 +32,18 @@ export class ProductCardComponent {
     const favorites = JSON.parse(
       localStorage.getItem('favoriteProducts') || '[]'
     );
-    this.isFavorite = favorites.includes(this.product._id);
+    this.isFavorite$ = favorites.includes(this.product._id);
   }
 
-  toggleFavorite() {
-    let favorites: string[] = JSON.parse(
-      localStorage.getItem('favoriteProducts') || '[]'
-    );
-
-    if (this.isFavorite) {
-      favorites = favorites.filter((id) => id !== this.product._id);
-    } else {
-      favorites.push(this.product._id);
-    }
-
-    localStorage.setItem('favoriteProducts', JSON.stringify(favorites));
-    this.isFavorite = !this.isFavorite;
+toggleFavorite() {
+    this.favoriteService.toggleFavorite(this.product._id);
   }
 
 toggleAddToCart(event: Event) {
   event.preventDefault();
 
-  if (this.isInCart) {
-    this.cartService.remove(this.product._id);
-  } else {
-    this.cartService.add(this.product._id);
-  }
-
-  this.isInCart = !this.isInCart;
+  this.cartService.add(this.product._id, 1);
+  this.isInCart = true;
 
   this.confetti.launchBasicConfetti();
 
