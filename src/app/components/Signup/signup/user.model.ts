@@ -16,6 +16,6 @@ export interface UserModel {
   password: string;
   addresses: Address[];
   creditCards: CreditCard[];
-  orderHistory: any; // until i declare product interface
+  orderHistory: any;
   isAdmin: boolean;
 }

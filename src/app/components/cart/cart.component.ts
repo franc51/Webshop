@@ -8,6 +8,7 @@ import { SpinnerComponent } from '../Spinner/spinner/spinner.component';
 import { OrderConfirmationComponent } from '../order-confirmation/order-confirmation.component';
 import { ConfettiService } from '../Shared/confetti.service';
 import { CartService } from './cart.service';
+import { OrderService } from './order.service';
 
 @Component({
   selector: 'app-cart',
@@ -26,6 +27,7 @@ export class CartComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
+    private orderService: OrderService,
     private confetti: ConfettiService,
     private router: Router
   ) {}

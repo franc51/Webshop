@@ -23,6 +23,7 @@ client = MongoClient(MONGO_URI)
 db = client['cyber']
 users_collection = db['users']
 product_collection = db['products']
+order_collection =db['orders']
 
 # Signup route
 @app.route('/api/signup', methods=['POST'])
@@ -123,7 +124,7 @@ def user_info():
     except Exception as e:
         print(f"❌ Unexpected error in /api/user: {e}")
         return jsonify({'message': 'Internal server error'}), 500
-    
+
 @app.route('/api/add-products', methods=['POST'])
 def add_product():
     data = request.json
@@ -202,6 +203,36 @@ def get_products():
     products = product_collection.find(filters)
     product_list = [{**p, '_id': str(p['_id'])} for p in products]
     return jsonify(product_list), 200
+
+@app.route('/api/orders', methods=['POST'])
+def create_order():
+    try:
+        data = request.json
+        # Basic field validation
+        required_fields = ['buyerId', 'products', 'totalAmount', 'shippingAddress', 'paymentMethod', 'isPaid', 'status']
+        if not all(field in data for field in required_fields):
+            return jsonify({'message': 'Missing required fields'}), 400
+        # Validate product list
+        products = data.get('products', [])
+        if not isinstance(products, list) or not all('productId' in p and 'name' in p and 'quantity' in p and 'priceAtPurchase' in p for p in products):
+            return jsonify({'message': 'Invalid product list'}), 400
+        # Build order document
+        order = {
+            'buyerId': data['buyerId'],
+            'products': products,
+            'totalAmount': float(data['totalAmount']),
+            'shippingAddress': data['shippingAddress'],
+            'paymentMethod': data['paymentMethod'],
+            'isPaid': bool(data['isPaid']),
+            'status': data['status'],
+            'createdAt': datetime.datetime.utcnow()
+        }
+        result = order_collection.insert_one(order)
+        order['_id'] = str(result.inserted_id)
+        return jsonify({'message': 'Order created successfully', 'order': order}), 201
+    except Exception as e:
+        print(f"❌ Error creating order: {e}")
+        return jsonify({'message': 'Internal server error'}), 500
 
 port = int(os.environ.get("PORT", 8080))
 app.run(host="0.0.0.0", port=port)
