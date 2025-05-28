@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { Route } from '@angular/router';
 import { Product, ProductService } from '../Admin/Add-product/product.service';
-import { CartService } from './cart.service';
 import { SpinnerComponent } from '../Spinner/spinner/spinner.component';
+import { OrderConfirmationComponent } from '../order-confirmation/order-confirmation.component';
 import { ConfettiService } from '../Shared/confetti.service';
+import { CartService } from './cart.service';
+
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -22,7 +26,8 @@ export class CartComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private confetti: ConfettiService
+    private confetti: ConfettiService,
+    private router: Router
   ) {}
 
     ngOnInit() {
@@ -70,13 +75,15 @@ loadCartProducts() {
   }
 
 increaseQuantity(productId: string) {
+  this.isLoading = true;
   this.cartService.add(productId);
-  setTimeout(() => this.loadCartProducts(), 50);
+  setTimeout(() => this.loadCartProducts(), 500);
 }
 
 
 
   decreaseQuantity(productId: string) {
+    this.isLoading = true;
     const currentQty = this.quantities[productId] || 1;
     if (currentQty > 1) {
       this.updateQuantity(productId, currentQty - 1);
@@ -84,6 +91,7 @@ increaseQuantity(productId: string) {
       // Optional: if quantity hits zero, remove product
       this.removeFromCart(productId);
     }
+    this.isLoading = false;
   }
 
  updateQuantity(productId: string, qty: number) {
@@ -130,10 +138,15 @@ increaseQuantity(productId: string) {
   }
 
   checkout() {
+    this.isLoading = true
+   setTimeout(() =>
+  {
     this.confetti.launchBasicConfetti();
     this.cartService.clearCart();
     this.cartProducts = [];
     this.quantities = {};
     this.total = 0;
+    this.router.navigate(['/order']);
+  }, 1000);
   }
 }

@@ -1,16 +1,32 @@
-<app-spinner *ngIf="isLoading"></app-spinner>
-<h2 class="your_cart">Your Cart</h2>
+<app-spinner *ngIf="isLoading" class="spinner"></app-spinner>
+<h2 class="your_cart">Your Cart <img src="/assets/images/shopping-cart.svg" alt=""></h2>
 
-<div class="cart_and_checkout">
-  <div *ngIf="!isLoading" class="cart_container">
     <div *ngIf="cartProducts.length === 0" class="empty-cart">
-      <p>Your cart is empty.</p>
+      <p>Start shopping on the products page.</p>
       <img
         src="https://img.freepik.com/premium-vector/shopping-cart-with-cross-mark-wireless-paymant-icon-shopping-bag-failure-paymant-sign-online-shopping-vector_662353-912.jpg"
         alt="Empty cart"
       />
     </div>
 
+<div class="cart_and_checkout" *ngIf="!isLoading">
+
+  <div class="cart_mobile" *ngIf="cartProducts.length > 0">
+    <div *ngFor="let product of cartProducts" class="item_mobile">
+      <img [src]="product.pictureUrl" alt="{{ product.name }}">
+      <div class="item_info_mobile">
+        <p>{{product.name}}</p>
+        <h3>{{product.price}} Lei</h3>
+         <div class="quantity_controls">
+              <a (click)="decreaseQuantity(product._id)"><img src="/assets/images/minus.svg" alt=""></a>
+              <span>{{ quantities[product._id] || 1 }}</span>
+              <a (click)="increaseQuantity(product._id)"><img src="/assets/images/plus.svg" alt=""></a>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart_container" *ngIf="!isLoading" >
     <table *ngIf="cartProducts.length > 0" class="cart_table">
       <thead>
         <tr>
@@ -18,7 +34,7 @@
           <th>Price (Lei)</th>
           <th>Quantity</th>
           <th>Subtotal (Lei)</th>
-          <th>Remove</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -48,7 +64,7 @@
     </table>
   </div>
 
-  <div *ngIf="cartProducts.length > 0" class="checkout_container">
+  <div class="checkout_container" *ngIf="cartProducts.length > 0" >
     <p><strong>Address:</strong></p>
     <select [(ngModel)]="selectedAddress" class="address_dropdown">
       <option *ngFor="let address of addresses" [value]="address">

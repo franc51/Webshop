@@ -1,13 +1,23 @@
 .cart_and_checkout {
   display: flex;
+  gap: 0.5rem;
   margin-top: 2rem;
   margin: 0 18rem;
-  box-shadow: 6px 6px 10px 6px rgba(128, 128, 128, 0.144);
+}
+
+@media  screen and (max-width: 600px) {
+  .cart_and_checkout {
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
 }
 
 .cart_container {
   flex: 2;
   overflow-x: auto;
+  border: 1px solid rgba(128, 128, 128, 0.11);
+
 }
 
 .cart_table {
@@ -17,7 +27,7 @@
 }
 
 .cart_table thead {
-  background-color: #f5f5f5;
+  background-color: #f5f5f500;
 }
 
 .cart_table th,
@@ -49,7 +59,7 @@
 .quantity_controls button {
   padding: 4px 10px;
   font-size: 16px;
-  background-color: #eee;
+  background-color: #d8d8d81f;
   border: 1px solid #ccc;
   border-radius: 4px;
   cursor: pointer;
@@ -82,10 +92,9 @@
 }
 
 .checkout_container {
-  padding: 1.5rem;
+  padding: 1rem;
   width: 20rem;
-  border-left: 1px solid rgba(128, 128, 128, 0.11);
-  border-top: 1px solid rgba(128, 128, 128, 0.11);
+  border: 1px solid rgba(128, 128, 128, 0.11);
 }
 
 .checkout_container input {
@@ -135,3 +144,69 @@
   border-radius: 4px;
   font-size: 1rem;
 }
+.spinner {
+  position: absolute;
+  top: 30%;
+  right: 47%;
+}
+.cart_mobile {
+  display: none;
+}
+
+
+
+/* cart on mobile */
+@media screen and (max-width: 600px) {
+  .cart_mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .cart_mobile img {
+    height: 5rem;
+  }
+  .item_mobile {
+    padding: 0.5rem;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    border: 1px solid rgba(0, 0, 0, 0.13);
+    border-radius: 4px;
+    position: relative;
+    align-items: center;
+    height: 6rem;
+  }
+
+  .cart_container {
+    display: none;
+  }
+  .checkout_container {
+    max-width: 98vw;
+  }
+  .cart_and_checkout{
+    box-shadow: unset;
+    padding-bottom: 5rem;
+    align-items: center;
+  }
+  .checkout_container{
+    border: none;
+  }
+  .swipe_to_delete {
+    text-align: center;
+    color: gray;
+  }
+  .quantity_controls {
+    position: absolute;
+    top: 68%;
+    right: 2%;
+  }
+  .quantity_controls a img{
+    height: 1.8rem;
+  }
+  .spinner {
+  top: 30%;
+  right: 40%;
+}
+}
+
