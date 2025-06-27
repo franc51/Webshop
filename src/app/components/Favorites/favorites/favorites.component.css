@@ -24,19 +24,10 @@
 .no_products_available {
   grid-column: 1 / -1;
   text-align: center;
-  margin-top: 4rem;
-}
-
-.no_products_available p {
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: #666;
 }
 
 .no_products_available img {
-  width: 80px;
-  opacity: 0.6;
+  width: 50%;
 }
 .favorite_name {
   width: 100%;

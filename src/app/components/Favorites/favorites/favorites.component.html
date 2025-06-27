@@ -8,8 +8,10 @@
       [class.favoriteProducts_single]="favoriteProducts.length === 1"
     >
       <div *ngIf="favoriteProducts.length === 0" class="no_products_available">
-        <p>You don't have anything in your wishlist.</p>
-        <img src="/assets/images/cross.png" alt="No products" />
+        <img
+          src="https://sankramayurveda.com/uploads/empty_wishlist.png"
+          alt="No products"
+        />
       </div>
 
       <div *ngFor="let product of favoriteProducts">

@@ -12,11 +12,23 @@ from bson.errors import InvalidId
 load_dotenv()
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
+
+CORS(app)
 
 # MongoDB connection string and secret key for JWT
-MONGO_URI = os.getenv("MONGO_URI")
-SECRET_KEY = os.getenv('SECRET_KEY')
+# Get the Mongo URI from environment variable
+MONGO_URI = os.environ.get("MONGO_URI")
+
+if not MONGO_URI:
+    raise ValueError("MONGO_URI environment variable is missing")
+
+if not MONGO_URI.startswith("mongodb://") and not MONGO_URI.startswith("mongodb+srv://"):
+    raise ValueError("Invalid MONGO_URI: must start with 'mongodb://' or 'mongodb+srv://'")
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+if not SECRET_KEY:
+    raise ValueError("SECRET_KEY environment variable is missing")
 
 # Connect to MongoDB
 client = MongoClient(MONGO_URI)
@@ -251,5 +263,7 @@ def create_order():
         print(f"❌ Error creating order: {e}")
         return jsonify({'message': 'Internal server error'}), 500
 
-port = int(os.environ.get("PORT", 8080))
-app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port)
+

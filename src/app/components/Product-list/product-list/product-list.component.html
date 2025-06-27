@@ -14,8 +14,10 @@
         *ngIf="!loading && products.length === 0"
         class="no_products_available"
       >
-        <p>No products available.</p>
-        <img src="/assets/images/cross.png" alt="" />
+        <img
+          src="https://ih1.redbubble.net/image.1935458730.5425/flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
+          alt=""
+        />
       </div>
       <div *ngFor="let product of products" (click)="goToProduct(product._id)">
         <app-product-card [product]="product"></app-product-card>

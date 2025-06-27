@@ -35,14 +35,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid red;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-weight: 600;
-  margin-top: 1rem;
+  border: 1px solid rgba(128, 128, 128, 0.263);
+  width: 65rem;
+}
+ .no_products_available img {
+  height: 28rem;
 }
 
 @media screen and (max-width: 700px) {
+.no_products_available {
+  border: unset;
+}
   .product_list {
     margin: 0;
     display: grid;
