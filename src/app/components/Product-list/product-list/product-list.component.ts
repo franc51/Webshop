@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductCardComponent } from '../../Product card/product-card/product-card.component';
 import { ProductFilterComponent } from '../Product-filter/product-filter/product-filter.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ProductService,
   Product,
@@ -29,7 +29,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -37,6 +38,10 @@ export class ProductListComponent implements OnInit {
       const category = params['category'];
       this.fetchProducts(category);
     });
+  }
+
+  goToProduct(productId: string){
+    this.router.navigate(['/product', productId])
   }
 
   // Called when filters are changed from the filter component

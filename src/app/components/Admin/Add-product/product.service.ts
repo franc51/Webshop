@@ -23,6 +23,7 @@ export interface Product {
 export class ProductService {
   private postProductsRoute = `${environment.apiUrl}/api/add-products`;
   private getProductsRoute = `${environment.apiUrl}/api/get-all-products`;
+  private getProductRoute = `${environment.apiUrl}/api/get-product`;
 
   constructor(private http: HttpClient) {}
 
@@ -34,6 +35,10 @@ export class ProductService {
     }
     return this.http.get<Product[]>(this.getProductsRoute, { params });
   }
+
+  getProductById(id: string): Observable<Product> {
+  return this.http.get<Product>(`${this.getProductRoute}/${id}`);
+}
 
   // Method to add a product
   addProduct(product: Product): Observable<any> {

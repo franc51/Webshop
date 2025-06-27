@@ -9,6 +9,7 @@ import { AddProductsComponent } from './components/Admin/Add-product/add-product
 import { ProductListComponent } from './components/Product-list/product-list/product-list.component';
 import { CartComponent } from './components/cart/cart.component';
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { ProductPageComponent } from './components/product-page/product-page.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -23,6 +24,8 @@ export const routes: Routes = [
   { path: 'add-new-product', component: AddProductsComponent },
   { path: 'products/:category', component: ProductListComponent },
   { path: 'order', component: OrderConfirmationComponent },
+  { path: 'product/:id', component: ProductPageComponent },
+
 
 ];
 

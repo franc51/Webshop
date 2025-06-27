@@ -1,0 +1,35 @@
+<div class="product_main_container" *ngIf="product">
+  <div class="product_pictures_container">
+    <img
+      *ngFor="let img of product.pictureUrl"
+      [src]="img"
+      alt="Product image"
+    />
+  </div>
+
+  <div class="product_info_container">
+    <h1>{{ product.name }}</h1>
+    <h2>{{ product.price | currency }}</h2>
+
+    <div>
+      <p>Selected color:</p>
+      <div class="color_options"></div>
+    </div>
+
+    <div class="product_storage_capacity_container"></div>
+
+    <div class="product_specs_container"></div>
+
+    <div class="product_buttons"></div>
+
+    <div class="products_lastinfo"></div>
+  </div>
+</div>
+
+<div *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<div *ngIf="!loading && !product">
+  <p>Product not found.</p>
+</div>

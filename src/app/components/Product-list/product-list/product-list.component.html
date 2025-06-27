@@ -17,7 +17,7 @@
         <p>No products available.</p>
         <img src="/assets/images/cross.png" alt="" />
       </div>
-      <div *ngFor="let product of products">
+      <div *ngFor="let product of products" (click)="goToProduct(product._id)">
         <app-product-card [product]="product"></app-product-card>
       </div>
     </div>

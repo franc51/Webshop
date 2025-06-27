@@ -204,6 +204,23 @@ def get_products():
     product_list = [{**p, '_id': str(p['_id'])} for p in products]
     return jsonify(product_list), 200
 
+@app.route('/api/get-product/<product_id>', methods=['GET'])
+def get_product(product_id):
+    print(f"Fetching product with ID: {product_id}")
+    from bson import ObjectId
+    try:
+        obj_id = ObjectId(product_id)
+    except Exception as e:
+        print(f"Invalid ObjectId: {e}")
+        return jsonify({'error': 'Invalid product ID'}), 400
+    product = product_collection.find_one({'_id': obj_id})
+    if product:
+        product['_id'] = str(product['_id'])
+        return jsonify(product), 200
+    else:
+        print("Product not found")
+        return jsonify({'error': 'Product not found'}), 404
+
 @app.route('/api/orders', methods=['POST'])
 def create_order():
     try:
