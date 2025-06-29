@@ -15,6 +15,8 @@ import { SpinnerComponent } from '../Spinner/spinner/spinner.component';
 export class ProductPageComponent implements OnInit {
   product: Product | null = null;
   loading: boolean = false;
+  isFading = false;
+  hoverImage: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +32,27 @@ export class ProductPageComponent implements OnInit {
     });
   }
 
+ get currentImage() {
+  return this.hoverImage || this.product?.pictureUrls?.[0] || '';
+}
+
+
+  onHover(img: string) {
+    this.isFading = true;
+    setTimeout(() => {
+      this.hoverImage = img;
+      this.isFading = false;
+    }, 300); // duration matches CSS transition
+  }
+
+  onHoverLeave() {
+    this.isFading = true;
+    setTimeout(() => {
+      this.hoverImage = null;
+      this.isFading = false;
+    }, 300);
+  }
+
   loadProduct(id: string) {
     this.loading = true;
     this.productService.getProductById(id).subscribe(
@@ -42,5 +65,15 @@ export class ProductPageComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+   getMajorMinorParts(price: number) {
+    const [major, minor] = price
+      .toFixed(2) // ensures two decimals: "3899.99"
+      .replace('.', ',') // convert decimal to comma: "3899,99"
+      .split(','); // split into ["3899", "99"]
+
+    const majorFormatted = parseInt(major, 10).toLocaleString('de-DE'); // "3.899"
+
+    return { major: majorFormatted, minor };
   }
 }

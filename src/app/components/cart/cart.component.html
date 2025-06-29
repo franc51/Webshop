@@ -1,32 +1,37 @@
 <app-spinner *ngIf="isLoading" class="spinner"></app-spinner>
-<h2 class="your_cart">Your Cart <img src="/assets/images/shopping-cart.svg" alt=""></h2>
+<h2 class="your_cart">
+  Your Cart <img src="/assets/images/shopping-cart.svg" alt="" />
+</h2>
 
-    <div *ngIf="cartProducts.length === 0" class="empty-cart">
-      <p>Start shopping on the products page.</p>
-      <img
-        src="https://img.freepik.com/premium-vector/shopping-cart-with-cross-mark-wireless-paymant-icon-shopping-bag-failure-paymant-sign-online-shopping-vector_662353-912.jpg"
-        alt="Empty cart"
-      />
-    </div>
+<div *ngIf="cartProducts.length === 0" class="empty-cart">
+  <p>Start shopping on the products page.</p>
+  <img
+    src="https://img.freepik.com/premium-vector/shopping-cart-with-cross-mark-wireless-paymant-icon-shopping-bag-failure-paymant-sign-online-shopping-vector_662353-912.jpg"
+    alt="Empty cart"
+  />
+</div>
 
 <div class="cart_and_checkout" *ngIf="!isLoading">
-
   <div class="cart_mobile" *ngIf="cartProducts.length > 0">
     <div *ngFor="let product of cartProducts" class="item_mobile">
-      <img [src]="product.pictureUrl" alt="{{ product.name }}">
+      <img [src]="product.pictureUrls" alt="{{ product.name }}" />
       <div class="item_info_mobile">
-        <p>{{product.name}}</p>
-        <h3>{{product.price}} Lei</h3>
-         <div class="quantity_controls">
-              <a (click)="decreaseQuantity(product._id)"><img src="/assets/images/minus.svg" alt=""></a>
-              <span>{{ quantities[product._id] || 1 }}</span>
-              <a (click)="increaseQuantity(product._id)"><img src="/assets/images/plus.svg" alt=""></a>
-          </div>
+        <p>{{ product.name }}</p>
+        <h3>{{ product.price }} Lei</h3>
+        <div class="quantity_controls">
+          <a (click)="decreaseQuantity(product._id)"
+            ><img src="/assets/images/minus.svg" alt=""
+          /></a>
+          <span>{{ quantities[product._id] || 1 }}</span>
+          <a (click)="increaseQuantity(product._id)"
+            ><img src="/assets/images/plus.svg" alt=""
+          /></a>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="cart_container" *ngIf="!isLoading" >
+  <div class="cart_container" *ngIf="!isLoading">
     <table *ngIf="cartProducts.length > 0" class="cart_table">
       <thead>
         <tr>
@@ -40,7 +45,7 @@
       <tbody>
         <tr *ngFor="let product of cartProducts">
           <td class="product_cell">
-            <img [src]="product.pictureUrl" alt="{{ product.name }}" />
+            <img [src]="product.pictureUrls[0]" alt="{{ product.name }}" />
             <span>{{ product.name }}</span>
           </td>
           <td>{{ product.price.toFixed(2) }}</td>
@@ -64,7 +69,7 @@
     </table>
   </div>
 
-  <div class="checkout_container" *ngIf="cartProducts.length > 0" >
+  <div class="checkout_container" *ngIf="cartProducts.length > 0">
     <p><strong>Address:</strong></p>
     <select [(ngModel)]="selectedAddress" class="address_dropdown">
       <option *ngFor="let address of addresses" [value]="address">

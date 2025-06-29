@@ -1,28 +1,34 @@
 <div class="product_main_container" *ngIf="product">
   <div class="product_pictures_container">
     <img
-      *ngFor="let img of product.pictureUrl"
-      [src]="img"
-      alt="Product image"
+      [src]="currentImage"
+      [class.fade]="isFading"
+      alt="Main product image"
     />
+    <div class="preview_images">
+      <img
+        *ngFor="let img of product.pictureUrls.slice(1)"
+        [src]="img"
+        alt="Preview image"
+        (mouseenter)="onHover(img)"
+        (mouseleave)="onHoverLeave()"
+      />
+    </div>
   </div>
 
   <div class="product_info_container">
     <h1>{{ product.name }}</h1>
-    <h2>{{ product.price | currency }}</h2>
-
-    <div>
-      <p>Selected color:</p>
-      <div class="color_options"></div>
+    <h2>
+      {{ getMajorMinorParts(product.price).major }}
+      <span class="price_minor">
+        ,{{ getMajorMinorParts(product.price).minor }}
+      </span>
+      Lei
+    </h2>
+    <div class="product_page_btns">
+      <button class="add_to_cart_btn">Add to cart</button>
+      <button class="add_to_wish_btn">Add to wishlist</button>
     </div>
-
-    <div class="product_storage_capacity_container"></div>
-
-    <div class="product_specs_container"></div>
-
-    <div class="product_buttons"></div>
-
-    <div class="products_lastinfo"></div>
   </div>
 </div>
 

@@ -18,7 +18,7 @@
     <div class="nav_btns">
       <a routerLink="/favorites" (click)="closeMenu()">
         <img
-          src="assets/images/favorite-icon.png"
+          src="assets/images/unfav.svg"
           alt="favorite-icon"
           title="Favorites"
         />
@@ -31,11 +31,7 @@
         >
       </a>
       <a routerLink="/cart" (click)="closeMenu()">
-        <img
-          src="assets/images/cart.svg"
-          alt="shopping-cart"
-          title="Cart"
-        />
+        <img src="assets/images/cart.svg" alt="shopping-cart" title="Cart" />
         <span
           class="bubble hide_element"
           [class.bubble]="cartCount > 0"
@@ -50,7 +46,7 @@
         (click)="checkIfLoggedIn()"
         title="Account"
       >
-        <img src="assets/images/user.png" alt="user" />
+        <img src="assets/images/user.svg" alt="user" />
       </a>
     </div>
   </div>

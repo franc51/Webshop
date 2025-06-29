@@ -36,11 +36,14 @@ export class ProductCardComponent {
   }
 
 toggleFavorite() {
+    event?.stopPropagation();
+    event?.preventDefault();
     this.favoriteService.toggleFavorite(this.product._id);
   }
 
 toggleAddToCart(event: Event) {
-  event.preventDefault();
+    event?.stopPropagation();
+    event?.preventDefault();
 
   this.cartService.add(this.product._id, 1);
   this.isInCart = true;

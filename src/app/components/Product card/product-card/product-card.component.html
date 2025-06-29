@@ -1,24 +1,24 @@
 <div class="product_card">
-<img
-  class="fav"
-  [src]="
-    (isFavorite$ | async)
-      ? 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Heart_coraz%C3%B3n.svg'
-      : '/assets/images/unfav.svg'
-  "
-  alt="Toggle favorite"
-  (click)="toggleFavorite()"
-/>
+  <img
+    class="fav"
+    [src]="
+      (isFavorite$ | async)
+        ? 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Heart_coraz%C3%B3n.svg'
+        : '/assets/images/unfav.svg'
+    "
+    alt="Toggle favorite"
+    (click)="toggleFavorite()"
+  />
 
   <img
     *ngIf="product.newArrival"
     class="flag_new"
-    src="/assets/images/NEW.png"
+    src="/assets/images/new.png"
     alt=""
   />
 
   <div class="product_card_info">
-    <img [src]="product.pictureUrl" alt="{{ product.name }}" />
+    <img [src]="product.pictureUrls[0]" alt="{{ product.name }}" />
     <p>{{ product.name }}</p>
     <p class="green">In stock</p>
     <div class="rating">

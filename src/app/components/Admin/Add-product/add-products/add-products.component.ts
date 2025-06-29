@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Product, ProductService } from '../product.service';
+import { ConfettiService } from '../../../Shared/confetti.service';
 
 @Component({
   selector: 'app-add-products',
@@ -17,7 +18,7 @@ export class AddProductsComponent {
     _id: '',
     name: '',
     category: '',
-    pictureUrl: '',
+    pictureUrls: ['', '', ''],
     rating: 0,
     price: 0,
     newArrival: false,
@@ -26,7 +27,7 @@ export class AddProductsComponent {
   };
 
   // Inject the ProductService into the component
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private confetti: ConfettiService) {}
 
   // Method that handles form submission
   onSubmit(form: any) {
@@ -35,6 +36,8 @@ export class AddProductsComponent {
         next: (response) => {
           console.log('Product added successfully:', response);
           // Handle success, e.g., show a message, clear form, etc.
+          this.confetti.launchBasicConfetti();
+          form.resetForm();
         },
         error: (err) => {
           console.error('Error adding product:', err);

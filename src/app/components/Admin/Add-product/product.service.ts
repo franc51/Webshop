@@ -9,7 +9,7 @@ export interface Product {
   _id: string;
   name: string;
   category: string;
-  pictureUrl: string;
+  pictureUrls: ['','',''];
   rating: number;
   price: number;
   newArrival: boolean;

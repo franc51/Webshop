@@ -45,22 +45,45 @@
   </div>
 
   <div>
-    <label for="pictureUrl">Picture URL: from eMag CDN please.</label>
+    <label for="pictureUrl1">Picture URL 1:</label>
     <input
       type="url"
-      id="pictureUrl"
-      name="pictureUrl"
-      [(ngModel)]="product.pictureUrl"
+      id="pictureUrl1"
+      name="pictureUrl1"
+      [(ngModel)]="product.pictureUrls[0]"
       required
     />
-    <div
-      *ngIf="
-        productForm.controls['pictureUrl']?.invalid &&
-        productForm.controls['pictureUrl']?.touched
-      "
+  </div>
+
+  <div>
+    <label for="pictureUrl2">Picture URL 2:</label>
+    <input
+      type="url"
+      id="pictureUrl2"
+      name="pictureUrl2"
+      [(ngModel)]="product.pictureUrls[1]"
+    />
+  </div>
+
+  <div>
+    <label for="pictureUrl3">Picture URL 3:</label>
+    <input
+      type="url"
+      id="pictureUrl3"
+      name="pictureUrl3"
+      [(ngModel)]="product.pictureUrls[2]"
+    />
+  </div>
+
+  <div
+    *ngIf="
+      productForm.controls['pictureUrl1']?.invalid &&
+      productForm.controls['pictureUrl1']?.touched
+    "
+  >
+    <small class="error-text"
+      >At least one valid Picture URL is required.</small
     >
-      <small class="error-text">Valid Picture URL is required.</small>
-    </div>
   </div>
 
   <div>

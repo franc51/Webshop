@@ -8,6 +8,7 @@ import jwt
 import datetime
 from bson import ObjectId
 from bson.errors import InvalidId
+import logging
 
 load_dotenv()
 # Initialize Flask app
@@ -140,36 +141,54 @@ def user_info():
 @app.route('/api/add-products', methods=['POST'])
 def add_product():
     data = request.json
+    app.logger.info(f"Received data: {data}")
+
     name = data.get('name')
     category = data.get('category')
-    picture_url = data.get('pictureUrl')
+    picture_urls = data.get('pictureUrls')
     price = data.get('price')
     new_arrival = data.get('newArrival', False)
     bestseller = data.get('bestseller', False)
     featured = data.get('featured', False)
+
     # Validate required fields
-    if not all([name, category, picture_url, price is not None]):
+    if not all([name, category, picture_urls, price is not None]):
+        app.logger.error("Missing required fields")
         return jsonify({'message': 'Missing required fields'}), 400
+
+    # Validate picture_urls is a list and has at least one valid url
+    if not isinstance(picture_urls, list) or len(picture_urls) == 0:
+        app.logger.error("pictureUrls must be a non-empty list")
+        return jsonify({'message': 'pictureUrls must be a non-empty list'}), 400
+
     try:
         price = float(price)
-    except ValueError:
+    except (ValueError, TypeError) as e:
+        app.logger.error(f"Invalid price value: {price} - {e}")
         return jsonify({'message': 'Invalid price value'}), 400
+
     product = {
         'name': name,
         'category': category,
-        'pictureUrl': picture_url,
+        'pictureUrls': picture_urls,
         'price': price,
         'newArrival': bool(new_arrival),
         'bestseller': bool(bestseller),
         'featured': bool(featured)
     }
-    result = product_collection.insert_one(product)
-    product['_id'] = str(result.inserted_id)
+
+    try:
+        result = product_collection.insert_one(product)
+        product['_id'] = str(result.inserted_id)
+    except Exception as e:
+        app.logger.error(f"Error inserting product into DB: {e}")
+        return jsonify({'message': 'Database error'}), 500
 
     return jsonify({
         'message': 'Product added successfully',
         'product': product
     }), 201
+
 
 @app.route('/api/get-all-products', methods=['GET'])
 def get_products():
