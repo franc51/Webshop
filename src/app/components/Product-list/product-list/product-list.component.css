@@ -43,9 +43,6 @@
 }
 
 @media screen and (max-width: 700px) {
-.no_products_available {
-  border: unset;
-}
   .product_list {
     margin: 0;
     display: grid;
@@ -65,12 +62,13 @@
     padding: 0;
   }
   .no_products_available {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    margin: 0 4.5rem;
-    width: 100%;
+    width: 90vw;
+    padding: 1rem;
+    border: unset;
   }
+   .no_products_available img {
+  height: 20rem;
+}
 }
 
 @media screen and (max-width: 400px) {

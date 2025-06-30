@@ -119,9 +119,9 @@ increaseQuantity(productId: string) {
   loadSavedAddresses() {
     // Example: replace this with your real service
     this.addresses = [
-      '123 Main St, Cityville',
-      '456 Oak Dr, Townsville',
-      '789 Pine Ln, Hamletburg',
+      '123 Test St, Brasov',
+      '456 Fake Dr, Bucuresti',
+      '789 Pina Ln, Alba',
     ];
 
     // Optionally select the first by default

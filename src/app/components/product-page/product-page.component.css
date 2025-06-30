@@ -1,7 +1,7 @@
 .product_main_container {
     display: flex;
     gap: 1rem;
-    padding: 0 18rem;
+    padding: 2rem 18rem;
 }
 .product_pictures_container {
     display: flex;
@@ -85,4 +85,29 @@
 
 .preview_images img:hover {
   border-color: blue;
+}
+
+@media screen and (max-width:600px){
+  .product_main_container {
+    flex-direction: column;
+    padding: 2rem 0.5rem;
+}
+.product_pictures_container {
+    flex-direction: column;
+}
+.product_pictures_container img {
+    height: 25rem;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+.preview_images {
+  padding: 1rem 2rem;
+  text-align: center;
+}
+.preview_images img {
+    height: 5rem;
+    margin: 0.2rem;
+    padding: 1rem 2rem;
+}
+
 }

@@ -2,6 +2,7 @@
   <app-product-filter
     class="filters"
     (filtersChanged)="onFiltersChanged($event)"
+    *ngIf="!loading && products.length > 0"
   ></app-product-filter>
 
   <div class="product_list_wrapper">
@@ -15,7 +16,7 @@
         class="no_products_available"
       >
         <img
-          src="https://ih1.redbubble.net/image.1935458730.5425/flat,750x,075,f-pad,750x1000,f8f8f8.jpg"
+          src="https://t4.ftcdn.net/jpg/05/24/04/51/360_F_524045110_UXnCx4GEDapddDi5tdlY96s4g0MxHRvt.jpg"
           alt=""
         />
       </div>
